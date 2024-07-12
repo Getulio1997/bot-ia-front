@@ -1,0 +1,25 @@
+.container {
+  position: fixed;
+  bottom: 60px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  margin: auto;
+  background-color: #121212;
+}
+
+.pesquisa {
+  position: fixed;
+  bottom: 11%;
+  left: 10%;
+  max-width: 100%;
+  min-width: 80%;
+  font-size: 20px;
+  border: 2px solid #ababab;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgb(255 255 255 / 23%);
+  padding: 10px;
+  background-color: #00000000;
+}
+
