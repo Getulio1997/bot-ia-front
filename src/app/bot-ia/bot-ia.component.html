@@ -8,15 +8,26 @@
 
 <body>
   <div class="container">
-    <form action="" method="post">
+    <form (ngSubmit)="onSubmit()">
       <div class="input-group">
-        <input class="pesquisa" placeholder="Coloque seu código" id="search" name="search">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="submit"></button>
+        <textarea
+          #textarea
+          class="pesquisa"
+          placeholder="Coloque seu código"
+          [(ngModel)]="inputText"
+          name="search"
+          (input)="ajustaAltura()"
+        ></textarea>
+        <div class="caracteres">
+          Caracteres: {{ inputText.length }}
+        </div>
+        <div class="input-group-append btn">
+          <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
       </div>
     </form>
   </div>
+  <h5>Faz apenas sugestões de códigos e melhorias se necessário</h5>
 </body>
 
 </html>

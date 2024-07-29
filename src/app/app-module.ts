@@ -4,6 +4,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { BotIaComponent } from "./bot-ia/bot-ia.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { BotIaComponent } from "./bot-ia/bot-ia.component";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
