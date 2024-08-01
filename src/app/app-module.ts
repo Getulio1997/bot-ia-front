@@ -5,6 +5,8 @@ import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { BotIaComponent } from "./bot-ia/bot-ia.component";
 import { FormsModule } from "@angular/forms";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { BotApiRestService } from "../service/bot-api-rest.service";
 
 @NgModule({
   declarations: [
@@ -15,11 +17,11 @@ import { FormsModule } from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    BotApiRestService,
+    provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  ngDoBootstrap() {}
-}
+export class AppModule {}
