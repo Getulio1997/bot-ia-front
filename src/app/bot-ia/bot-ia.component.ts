@@ -10,15 +10,20 @@ import { Mensagem } from '../../model/mensagem';
 export class BotIaComponent {
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
 
-  mensagem: Mensagem[] = []
+  resposta: string = '';
   inputText: string = '';
 
-  constructor(
-    private botService: BotApiRestService
-  ) {}
+  constructor(private botApiRestService: BotApiRestService) {}
 
-  onSubmit(): void {
-    console.log('Form submitted:', this.inputText);
+  enviaMensagem(mensagem: string): void {
+    this.botApiRestService.enviarMensagem(mensagem).subscribe(
+      (response) => {
+        this.resposta = response.resposta;
+      },
+      (error) => {
+        console.error('Erro ao enviar mensagem', error);
+      }
+    );
   }
 
   ajustaAltura(): void {

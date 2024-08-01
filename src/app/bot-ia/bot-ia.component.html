@@ -8,7 +8,11 @@
 
 <body>
   <div class="container">
-    <form (ngSubmit)="onSubmit()">
+    <div *ngIf="resposta" class="resposta">
+      <h3>Resposta:</h3>
+      <p>{{ resposta }}</p>
+    </div>
+    <form (ngSubmit)="enviaMensagem(inputText)">
       <div class="input-group">
         <textarea
           #textarea
@@ -18,10 +22,7 @@
           name="search"
           (input)="ajustaAltura()"
         ></textarea>
-        <div class="caracteres">
-          Caracteres: {{ inputText.length }}
-        </div>
-        <div class="input-group-append btn">
+        <div>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
       </div>
