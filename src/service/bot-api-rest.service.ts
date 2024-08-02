@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Mensagem } from '../model/mensagem';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BotApiRestService {
 
-  private apiUrl = 'http://localhost:8000/analisa_texto';
+  private apiUrl = 'https://bot-ia-back.onrender.com/analisa_texto';
 
   constructor(private http: HttpClient) {}
 
