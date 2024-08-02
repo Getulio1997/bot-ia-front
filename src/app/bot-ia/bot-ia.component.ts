@@ -1,6 +1,5 @@
 import { BotApiRestService } from './../../service/bot-api-rest.service';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Mensagem } from '../../model/mensagem';
 
 @Component({
   selector: 'app-bot-ia',
@@ -30,6 +29,10 @@ export class BotIaComponent {
     const textarea = this.textarea.nativeElement;
     textarea.style.height = 'auto';
     textarea.style.height = `${Math.max(textarea.scrollHeight, 2 * parseFloat(getComputedStyle(textarea).fontSize))}px`;
+  }
+
+  formatarResposta(resposta: string): string {
+    return resposta.replace(/\n/g, '<br>').replace(/```(.*?)```/gs, '<pre>$1</pre>');
   }
 
 }
