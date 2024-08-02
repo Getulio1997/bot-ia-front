@@ -10,7 +10,7 @@
   <div class="container">
     <div *ngIf="resposta" class="resposta">
       <h3>Resposta:</h3>
-      <p>{{ resposta }}</p>
+      <div [innerHTML]="formatarResposta(resposta)"></div>
     </div>
     <form (ngSubmit)="enviaMensagem(inputText)">
       <div class="input-group">
