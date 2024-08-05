@@ -9,145 +9,161 @@
 
 .pesquisa {
   position: fixed;
-  width: 84%;
+  width: 60%;
   font-size: 15px;
-  border: 2px solid #444444;
-  border-radius: 50px;
-  padding: 10px 10px;
-  background-color: #2c2c2c;
+  border-radius: 10px;
+  padding: 10px;
   resize: none;
   min-height: 2rem;
   max-height: 20rem;
   overflow-y: auto;
-  left: 6rem;
-  bottom: 6rem;
-  color: white;
+  left: 49%;
+  transform: translateX(-50%);
+  bottom: 8rem;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .resposta {
   width: 70%;
-  margin-bottom: 10rem;
-  padding: 15px 15px;
+  margin: 0 auto;
+  padding: 15px;
   border: 1px solid #d21c1c;
   border-radius: 30px;
-  margin-left: 10rem;
-  color: white;
+  color: var(--text-color);
   text-align: justify;
-}
-
-.pesquisa::placeholder {
-  color: #bbbbbb;
+  margin-bottom: 16rem;
+  font-size: large;
+  position: relative;
 }
 
 .pesquisa:focus {
   border-color: #1a73e8;
-  box-shadow: 0 4px 8px rgb(26 115 232 / 50%);
+  box-shadow: 0 4px 6px rgba(26, 115, 232, 0.3);
 }
 
 .btn {
-  position: relative;
   margin-top: 10px;
+  display: inline-block;
 }
 
 .btn-primary {
   background-color: transparent;
-  border: 1px solid #bbbbbb;
-  color: #ffffff;
+  border: 1px solid var(--button-border-color);
+  color: var(--button-text-color);
   font-size: 15px;
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.5s, border-color 0.5s;
-  top: 8px;
-  left: 35rem;
+  margin-left: -3rem;
+  position: relative;
+  bottom: 1rem;
 }
 
 .btn-primary:hover {
   background-color: #0074f197;
-  border-color: #f8f8f8;
 }
 
-.btn-primary:active {
-  background-color: #004085;
-  border-color: #003766;
-}
-
-.btn-danger {
-  background-color: transparent;
-  border: 1px solid #bbbbbb;
-  color: #ffffff;
-  font-size: 15px;
-  padding: 10px 20px;
-  border-radius: 8px;
+.btn-toggle-theme {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.5s, border-color 0.5s;
-  top: -40px;
-  left: 28rem;
-}
-
-.btn-danger:hover {
-  background-color: #f1000097;
-  border-color: #f8f8f8;
-}
-
-.btn-danger:active {
-  background-color: #850000;
-  border-color: #660000;
 }
 
 h5 {
   position: fixed;
   bottom: 2%;
-  left: 10rem;
+  left: 49%;
+  transform: translateX(-50%);
   width: 80%;
   text-align: center;
-  color: #c0c0c0;
+  color: var(--text-color);
 }
+
 
 @media (max-width: 768px) {
   .pesquisa {
-    width: 84%;
-    left: 17px;
-    bottom: 14rem;
+    width: 90%;
+    font-size: 14px;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .resposta {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10rem;
   }
 
   .btn-primary {
-    top: -63px;
-    left: -17px;
-    width: 91%;
-    text-align: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    margin-left: 0;
   }
 
-  .btn-danger {
-    top: -63px;
-    left: -17px;
-    width: 91%;
-    text-align: center;
+  .btn-toggle-theme {
+    top: 5px;
+    right: 5px;
+    padding: 8px;
   }
 
   h5 {
-    left: 5%;
     width: 90%;
-    top: 51rem;
+    font-size: 12px;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .container {
+    font-size: 11px;
   }
 }
 
-@media (orientation: landscape) and (max-width: 768px) {
+@media (max-width: 480px) {
   .pesquisa {
-    width: 90%;
-    left: 28px;
-    bottom: 7rem;
+    width: 85%;
+    font-size: 15px;
+    bottom: 10rem;
+  }
+
+  .resposta {
+    width: 79%;
+    margin-bottom: 8rem;
+    margin-left: 11px;
+    top: -6rem;
+    font-size: small;
   }
 
   .btn-primary {
-    top: -2px;
-    left: -16px;
-    width: 23%;
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    left: -1rem;
+    top: -3rem;
+  }
+
+  .btn-toggle-theme {
+    top: 0;
+    right: 0;
+    padding: 10px;
   }
 
   h5 {
-    left: 5%;
-    width: 90%;
-    top: 21rem;
+    width: 100%;
+    font-size: 13px;
+    bottom: 4%;
+    left: 49%;
+    transform: translateX(-50%);
+  }
+
+  .container {
+    font-size: 10px;
   }
 }

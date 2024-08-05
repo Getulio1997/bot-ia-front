@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bot IA</title>
 </head>
-
 <body>
   <div class="container">
+    <button (click)="corAlterado()" class="btn-toggle-theme">
+      {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+    </button>
     <div *ngIf="resposta" class="resposta">
       <h3>Resposta:</h3>
       <div [innerHTML]="formatarResposta(resposta)"></div>
@@ -21,6 +23,7 @@
           [(ngModel)]="inputText"
           name="search"
           (input)="ajustaAltura()"
+          (keydown.enter)="enviaMensagem(inputText)"
         ></textarea>
         <div>
           <button class="btn btn-primary" type="submit">Enviar</button>
@@ -30,5 +33,4 @@
   </div>
   <h5>Faz apenas sugestões de códigos e melhorias se necessário</h5>
 </body>
-
 </html>
