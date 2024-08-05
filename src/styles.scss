@@ -1,3 +1,54 @@
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --placeholder-color: #888888;
+  --border-color: #44444463;
+  --button-text-color: #444444;
+  --button-border-color: #444444;
+  --button-active-bg-color: #004085;
+  --button-active-border-color: #003766;
+}
+
+.dark-mode {
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --placeholder-color: #bbbbbb;
+  --border-color: #bbbbbb;
+  --button-text-color: #e0e0e0;
+  --button-border-color: #bbbbbb;
+  --button-active-bg-color: #003766;
+  --button-active-border-color: #00274d;
+}
+
 body {
-  background-color: black;
+  transition: background-color 0s, color 0.5s;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+body.dark-mode {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+body.dark-mode .pesquisa {
+  border-color: var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+body.dark-mode p {
+  color: var(--text-color);
+}
+
+body.dark-mode .pesquisa::placeholder {
+  color: var(--placeholder-color);
+}
+
+footer.copy {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: var(--text-color);
 }
