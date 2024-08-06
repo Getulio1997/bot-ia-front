@@ -1,5 +1,5 @@
 import { BotApiRestService } from './../../service/bot-api-rest.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-bot-ia',
@@ -12,6 +12,7 @@ export class BotIaComponent implements OnInit {
   resposta: string = '';
   inputText: string = '';
   isDarkMode: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private botApiRestService: BotApiRestService) {}
 
@@ -36,17 +37,34 @@ export class BotIaComponent implements OnInit {
       return;
     }
 
-    this.botApiRestService.enviarMensagem(mensagem).subscribe(
-      (response) => {
-        this.resposta = response.resposta;
-        this.inputText = '';
-        this.textarea.nativeElement.value = '';
-        this.ajustaAltura();
-      },
-      (error) => {
-        console.error('Erro ao enviar mensagem', error);
-      }
-    );
+    const button = document.querySelector('.btn-primary');
+
+    if (button) {
+      button.classList.add('btn-loading');
+
+      this.botApiRestService.enviarMensagem(mensagem).subscribe(
+        (response) => {
+          this.resposta = response.resposta;
+          this.inputText = '';
+
+          setTimeout(() => {
+            button.classList.remove('btn-loading');
+            button.classList.add('btn-success');
+
+            setTimeout(() => {
+              button.classList.remove('btn-success');
+            }, 1250);
+
+            this.textarea.nativeElement.value = '';
+            this.ajustaAltura();
+          }, 2250);
+        },
+        (error) => {
+          console.error('Erro ao enviar mensagem', error);
+          button.classList.remove('btn-loading');
+        }
+      );
+    }
   }
 
   ajustaAltura() {
