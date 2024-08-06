@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bot IA</title>
 </head>
 <body>
   <div class="container">
@@ -14,19 +13,20 @@
       <h3>Resposta:</h3>
       <div [innerHTML]="formatarResposta(resposta)"></div>
     </div>
+    <span *ngIf="isLoading" class="loading-spinner"></span>
     <form (ngSubmit)="enviaMensagem(inputText)">
       <div>
-          <textarea
-            #textarea
-            class="pesquisa"
-            placeholder="Coloque seu código"
-            [(ngModel)]="inputText"
-            name="search"
-            (input)="ajustaAltura()"
-            (keydown.enter)="enviaMensagem(inputText)"
-          ></textarea>
+        <textarea
+          #textarea
+          class="pesquisa"
+          placeholder="Coloque seu código"
+          [(ngModel)]="inputText"
+          name="search"
+          (input)="ajustaAltura()"
+          (keydown.enter)="enviaMensagem(inputText)"
+        ></textarea>
         <div>
-          <button class="btn btn-primary" type="submit">Enviar</button>
+          <button class="btn btn-primary" type="submit"><span>Enviar</span></button>
         </div>
       </div>
     </form>
