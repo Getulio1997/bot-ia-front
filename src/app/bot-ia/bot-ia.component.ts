@@ -37,6 +37,7 @@ export class BotIaComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
     const button = document.querySelector('.btn-primary');
 
     if (button) {
@@ -46,6 +47,7 @@ export class BotIaComponent implements OnInit {
         (response) => {
           this.resposta = response.resposta;
           this.inputText = '';
+          this.isLoading = false;
 
           setTimeout(() => {
             button.classList.remove('btn-loading');
@@ -57,10 +59,11 @@ export class BotIaComponent implements OnInit {
 
             this.textarea.nativeElement.value = '';
             this.ajustaAltura();
-          }, 2250);
+          }, 100);
         },
         (error) => {
           console.error('Erro ao enviar mensagem', error);
+          this.isLoading = false;
           button.classList.remove('btn-loading');
         }
       );
