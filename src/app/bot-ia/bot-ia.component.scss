@@ -1,7 +1,7 @@
 .background-image-container {
   position: absolute;
   top: -4rem;
-  left: 30rem;
+  left: 25rem;
   width: 50%;
   height: 80%;
   background-image: url("/assets/images/logo.png");
@@ -97,12 +97,34 @@
   height: 11rem;
 }
 
+.img-usuario {
+  position: absolute;
+  bottom: -6rem;
+  right: 34rem;
+  background-image: url("/assets/images/usuario.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 40px;
+  height: 11rem;
+}
+
+.mensagens-enviadas-container {
+  max-height: 10rem;
+  overflow-y: auto;
+  margin-bottom: -5rem;
+}
+
+.mensagens-enviadas-container::-webkit-scrollbar {
+  display: none;
+}
+
 .mensagens-enviadas {
-  margin: 20px 0;
+  margin: 10rem 0;
   text-align: left;
 }
 
-.mensagens-enviadas div {
+.mensagens-enviadas .mensagem {
   display: flex;
   align-items: flex-start;
   margin-top: 20px;
@@ -119,6 +141,9 @@
   border-bottom-left-radius: 0px;
 }
 
+.mensagens-enviadas .mensagem-texto {
+  flex: 1;
+}
 
 .btn {
   margin-top: 10px;
@@ -137,16 +162,16 @@
   margin-left: -3rem;
   position: relative;
   bottom: 1rem;
+}
 
-  &:active {
-    animation: pulse 0.2s ease-in-out;
-  }
+.btn-primary:active {
+  animation: pulse 0.2s ease-in-out;
+}
 
-  &:hover {
-    transform: scale(1.1);
-    background-color: #41f1b37d;
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-  }
+.btn-primary:hover {
+  transform: scale(1.1);
+  background-color: #41f1b37d;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 @keyframes pulse {
@@ -254,12 +279,12 @@ h5 {
     bottom: 6rem;
     left: 40%;
     transform: translateX(-50%);
-}
+  }
 
   .resposta {
-    width: 79%;
+    width: 80%;
     margin-bottom: 8rem;
-    top: -6rem;
+    top: -2rem;
     font-size: small;
     left: -1rem;
   }
@@ -297,15 +322,39 @@ h5 {
   }
 
   .background-image-container {
-    position: fixed;
     top: -10rem;
     left: 5%;
     width: 90%;
-    height: 80%;
     background-image: url("/assets/images/logo-celular.png");
-    background-repeat: no-repeat;
-    background-position: center;
     background-size: contain;
-    opacity: 10%;
   }
+
+  .img-resposta {
+    bottom: -7rem;
+    right: -1rem;
+    background-image: url("/assets/images/bot.png");
+    width: 40px;
+    height: 11rem;
+  }
+
+  .img-usuario {
+    bottom: -6rem;
+    right: 10rem;
+    background-image: url("/assets/images/usuario.png");
+    height: 11rem;
+  }
+
+  .mensagens-enviadas-container {
+    max-height: 40rem;
+    margin-bottom: 0rem;
+  }
+
+  .mensagens-enviadas .mensagem {
+    left: 2rem;
+  }
+
+  .mensagens-enviadas {
+    margin: 5rem 0;
+  }
+
 }

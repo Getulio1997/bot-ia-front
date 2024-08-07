@@ -10,9 +10,14 @@
     <button (click)="corAlterado()" class="btn-toggle-theme">
       {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
     </button>
-    <div *ngIf="mensagens.length > 0" class="mensagens-enviadas">
-      <div *ngFor="let mensagem of mensagens">
-        {{ mensagem }}
+    <div class="mensagens-enviadas-container">
+      <div *ngIf="mensagens.length > 0" class="mensagens-enviadas">
+        <div *ngFor="let mensagem of mensagens">
+          <div class="mensagem">
+            <div class="img-usuario" alt="Logo usuario"></div>
+            <div class="mensagem-texto">{{ mensagem }}</div>
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="resposta" class="resposta">
