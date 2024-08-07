@@ -1,3 +1,15 @@
+.background-image-container {
+  position: absolute;
+  top: -4rem;
+  left: 30rem;
+  width: 50%;
+  height: 80%;
+  background-image: url("/assets/images/logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 10%;
+}
+
 .container {
   position: fixed;
   bottom: 60px;
@@ -40,30 +52,73 @@
   50% {
     border-image-source: linear-gradient(to right, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8);
     border-image-slice: 1;
-    border-image-width: 3px;
+    border-image-width: 2.5px;
   }
 
   100% {
     border-image-source: linear-gradient(to right, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8);
     border-image-slice: 1;
-    border-image-width: 3px;
+    border-image-width: 2.5px;
   }
 }
 
 .resposta {
-  width: 77%;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+  width: 34%;
   margin: 0 auto;
-  padding: 15px;
+  padding: 18px;
   border: 1px solid #d21c1c;
-  border-radius: 30px;
+  border-radius: 43px;
   color: var(--text-color);
   text-align: justify;
   margin-bottom: 16rem;
   font-size: large;
   position: relative;
-  bottom: -11rem;
-  left: -1rem;
+  bottom: -7rem;
+  left: 26rem;
+  border-bottom-right-radius: 0px;
 }
+
+.resposta-texto {
+  flex: 1;
+}
+
+.img-resposta {
+  position: absolute;
+  bottom: -7rem;
+  right: -2rem;
+  background-image: url("/assets/images/bot.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 40px;
+  height: 11rem;
+}
+
+.mensagens-enviadas {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.mensagens-enviadas div {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+  width: 34%;
+  padding: 18px;
+  border: 1px solid #d21c1c;
+  border-radius: 43px;
+  color: var(--text-color);
+  text-align: justify;
+  font-size: large;
+  position: relative;
+  bottom: 8rem;
+  left: 3rem;
+  border-bottom-left-radius: 0px;
+}
+
 
 .btn {
   margin-top: 10px;
@@ -204,9 +259,9 @@ h5 {
   .resposta {
     width: 79%;
     margin-bottom: 8rem;
-    margin-left: 11px;
     top: -6rem;
     font-size: small;
+    left: -1rem;
   }
 
   .btn-primary {
@@ -239,5 +294,18 @@ h5 {
 
   .container {
     font-size: 10px;
+  }
+
+  .background-image-container {
+    position: fixed;
+    top: -10rem;
+    left: 5%;
+    width: 90%;
+    height: 80%;
+    background-image: url("/assets/images/logo-celular.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 10%;
   }
 }
