@@ -1,5 +1,5 @@
 import { BotApiRestService } from './../../service/bot-api-rest.service';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-bot-ia',
@@ -13,6 +13,7 @@ export class BotIaComponent implements OnInit {
   inputText: string = '';
   isDarkMode: boolean = false;
   isLoading: boolean = false;
+  mensagens: string[] = [];
 
   constructor(private botApiRestService: BotApiRestService) {}
 
@@ -20,6 +21,9 @@ export class BotIaComponent implements OnInit {
     const darkModeSetting = localStorage.getItem('darkMode');
     this.isDarkMode = darkModeSetting === 'true';
     this.aplicaTema();
+
+    const mensagemStorege = localStorage.getItem('mensagens');
+    this.mensagens = mensagemStorege ? JSON.parse(mensagemStorege) : [];
   }
 
   corAlterado() {
@@ -48,6 +52,8 @@ export class BotIaComponent implements OnInit {
           this.resposta = response.resposta;
           this.inputText = '';
           this.isLoading = false;
+          this.mensagens.push(mensagem);
+          localStorage.setItem('chats', JSON.stringify(this.mensagens));
 
           setTimeout(() => {
             button.classList.remove('btn-loading');
