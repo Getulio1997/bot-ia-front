@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
 </head>
+
 <body [ngClass]="{ 'dark-mode': isDarkMode }">
   <div class="background-image-container" alt="Logo Bot"></div>
   <div class="container">
     <button (click)="corAlterado()" class="btn-toggle-theme">
       {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
     </button>
-    <div class="mensagens-enviadas-container">
-      <div *ngIf="mensagens.length > 0" class="mensagens-enviadas">
-        <div *ngFor="let mensagem of mensagens">
-          <div class="mensagem">
-            <div class="img-usuario" alt="Logo usuario"></div>
-            <div class="mensagem-texto">{{ mensagem }}</div>
-          </div>
+
+    <div class="chat-container" #chatContainer>
+      <div *ngFor="let item of mensagens; let i = index" class="mensagens-enviadas">
+        <div class="mensagem">
+          <div class="img-usuario" alt="Logo usuario"></div>
+          <div class="mensagem-texto" [innerHTML]="item.mensagem"></div>
+          <button (click)="removeMensagem(i)" class="btn-remove">X</button>
+        </div>
+
+        <div *ngIf="item.resposta" class="resposta">
+          <div class="resposta-texto" [innerHTML]="item.resposta"></div>
+          <div class="img-resposta" alt="Logo bot"></div>
         </div>
       </div>
     </div>
-    <div *ngIf="resposta" class="resposta">
-      <div [innerHTML]="formatarResposta(resposta)" class="resposta-texto"></div>
-      <div class="img-resposta" alt="Logo bot"></div>
-    </div>
+
     <span *ngIf="isLoading" class="loading-spinner"></span>
+
     <form (ngSubmit)="enviaMensagem(inputText)">
-      <div>
-        <textarea
-          #textarea
-          class="pesquisa"
-          placeholder="Coloque seu código"
-          [(ngModel)]="inputText"
-          name="search"
-          (input)="ajustaAltura()"
-          (keydown.enter)="enviaMensagem(inputText)"
-        ></textarea>
-        <div>
-          <button class="btn btn-primary" type="submit"><span>Enviar</span></button>
-        </div>
-      </div>
+      <textarea
+        #textarea
+        class="pesquisa"
+        placeholder="Coloque seu código"
+        [(ngModel)]="inputText"
+        name="search"
+        (input)="ajustaAltura()"
+        (keydown.enter)="enviaMensagem(inputText)"
+      ></textarea>
+      <button class="btn-primary" type="submit">
+        <span>Enviar</span>
+      </button>
     </form>
   </div>
+
   <h5>Faz apenas sugestões de códigos e melhorias se necessário</h5>
 </body>
+
 </html>

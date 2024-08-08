@@ -1,5 +1,6 @@
-import { BotApiRestService } from './../../service/bot-api-rest.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { BotApiRestService } from './../../service/bot-api-rest.service';
+import { Mensagem } from '../../model/mensagem';
 
 @Component({
   selector: 'app-bot-ia',
@@ -8,12 +9,12 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class BotIaComponent implements OnInit {
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('chatContainer') chatContainer!: ElementRef<HTMLDivElement>;
 
-  resposta: string = '';
   inputText: string = '';
   isDarkMode: boolean = false;
   isLoading: boolean = false;
-  mensagens: string[] = [];
+  mensagens: Mensagem[] = [];
 
   constructor(private botApiRestService: BotApiRestService) {}
 
@@ -22,9 +23,21 @@ export class BotIaComponent implements OnInit {
     this.isDarkMode = darkModeSetting === 'true';
     this.aplicaTema();
 
-    const mensagemStorege = localStorage.getItem('mensagens');
-    this.mensagens = mensagemStorege ? JSON.parse(mensagemStorege) : [];
+    const mensagensStorage = localStorage.getItem('mensagens');
+    this.mensagens = mensagensStorage ? JSON.parse(mensagensStorage).map((msg: any) => new Mensagem(msg.mensagem, msg.resposta)) : [];
   }
+
+  ngAfterViewInit() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    setTimeout(() => {
+      const container = this.chatContainer.nativeElement;
+      container.scrollTop = container.scrollHeight;
+    }, 0);
+  }
+
 
   corAlterado() {
     this.isDarkMode = !this.isDarkMode;
@@ -42,38 +55,35 @@ export class BotIaComponent implements OnInit {
     }
 
     this.isLoading = true;
-    const button = document.querySelector('.btn-primary');
+    const mensagemFormatada = this.formatarMensagem(mensagem);
+    const mensagemItem = new Mensagem(mensagemFormatada);
+    this.mensagens.push(mensagemItem);
+    localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
 
-    if (button) {
-      button.classList.add('btn-loading');
+    this.botApiRestService.enviarMensagem(mensagem).subscribe(
+      (response) => {
+        mensagemItem.resposta = this.formatarResposta(response.resposta);
+        this.inputText = '';
+        this.isLoading = false;
+        this.scrollToBottom();
+        this.ajustaAltura();
 
-      this.botApiRestService.enviarMensagem(mensagem).subscribe(
-        (response) => {
-          this.resposta = response.resposta;
-          this.inputText = '';
-          this.isLoading = false;
-          this.mensagens.push(mensagem);
-          localStorage.setItem('chats', JSON.stringify(this.mensagens));
+        setTimeout(() => {
+          this.textarea.nativeElement.style.height = '';
+        }, 100);
 
-          setTimeout(() => {
-            button.classList.remove('btn-loading');
-            button.classList.add('btn-success');
+        localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
+      },
+      (error) => {
+        console.error('Erro ao enviar mensagem', error);
+        this.isLoading = false;
+      }
+    );
+  }
 
-            setTimeout(() => {
-              button.classList.remove('btn-success');
-            }, 1250);
-
-            this.textarea.nativeElement.value = '';
-            this.ajustaAltura();
-          }, 100);
-        },
-        (error) => {
-          console.error('Erro ao enviar mensagem', error);
-          this.isLoading = false;
-          button.classList.remove('btn-loading');
-        }
-      );
-    }
+  removeMensagem(index: number) {
+    this.mensagens.splice(index, 1);
+    localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
   }
 
   ajustaAltura() {
@@ -85,4 +95,9 @@ export class BotIaComponent implements OnInit {
   formatarResposta(resposta: string): string {
     return resposta.replace(/\n/g, '<br>').replace(/```(.*?)```/gs, '<pre>$1</pre>');
   }
+
+  formatarMensagem(mensagem: string): string {
+    return mensagem.replace(/\n/g, '<br>').replace(/```(.*?)```/gs, '<pre>$1</pre>');
+  }
+
 }

@@ -1,15 +1,3 @@
-.background-image-container {
-  position: absolute;
-  top: -4rem;
-  left: 25rem;
-  width: 50%;
-  height: 80%;
-  background-image: url("/assets/images/logo.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 10%;
-}
-
 .container {
   position: fixed;
   bottom: 60px;
@@ -27,15 +15,16 @@
   resize: none;
   min-height: 2rem;
   max-height: 20rem;
-  overflow-y: auto;
-  border: 5px solid transparent;
+  border: 5px solid var(--border-color);
   border-radius: 10px;
   box-shadow: 0 0 0 rgba(255, 255, 255, 0.5);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   bottom: 1rem;
-  background: #fff;
-  animation: glowingBorder 3s linear infinite;
-  left: -15px;
   box-sizing: border-box;
+  top: -3rem;
+  animation: glowingBorder 3s linear infinite;
 }
 
 .pesquisa:focus {
@@ -48,13 +37,11 @@
     border-image-slice: 1;
     border-image-width: 1px;
   }
-
   50% {
     border-image-source: linear-gradient(to right, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8);
     border-image-slice: 1;
     border-image-width: 2.5px;
   }
-
   100% {
     border-image-source: linear-gradient(to right, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8);
     border-image-slice: 1;
@@ -62,87 +49,119 @@
   }
 }
 
-.resposta {
+.background-image-container {
+  position: absolute;
+  top: -4rem;
+  left: 25rem;
+  width: 50%;
+  height: 80%;
+  background-image: url("/assets/images/logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 10%;
+}
+
+.chat-container {
+  max-height: 70vh;
+  margin-bottom: 20px;
+  overflow-y: auto;
   display: flex;
-  align-items: flex-start;
-  margin-top: 20px;
-  width: 34%;
-  margin: 0 auto;
-  padding: 18px;
-  border: 1px solid #d21c1c;
-  border-radius: 43px;
-  color: var(--text-color);
+  flex-direction: column;
+  padding: 10px;
+}
+
+.mensagem-texto,
+.resposta-texto {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.resposta,
+.mensagens-enviadas .mensagem {
+  margin: 10px 0;
   text-align: justify;
-  margin-bottom: 16rem;
   font-size: large;
+  border-radius: 43px;
+  padding: 18px;
   position: relative;
-  bottom: -7rem;
-  left: 26rem;
-  border-bottom-right-radius: 0px;
+  border: 1px solid #d21c1c;
+  color: var(--text-color);
+  max-width: 80%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+.resposta {
+  margin-top: 20px;
+  margin-bottom: 16rem;
+  width: 34%;
+  left: 1rem;
+  bottom: -20rem;
+  border-bottom-left-radius: 0px;
 }
 
 .resposta-texto {
   flex: 1;
 }
 
-.img-resposta {
+.img-resposta,
+.img-usuario {
   position: absolute;
-  bottom: -7rem;
-  right: -2rem;
-  background-image: url("/assets/images/bot.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   width: 40px;
   height: 11rem;
+}
+
+.img-resposta {
+  bottom: -7rem;
+  right: 39rem;
+  background-image: url("/assets/images/bot.png");
 }
 
 .img-usuario {
-  position: absolute;
-  bottom: -6rem;
-  right: 34rem;
+  bottom: -7rem;
+  right: -1rem;
   background-image: url("/assets/images/usuario.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  width: 40px;
-  height: 11rem;
-}
-
-.mensagens-enviadas-container {
-  max-height: 10rem;
-  overflow-y: auto;
-  margin-bottom: -5rem;
 }
 
 .mensagens-enviadas-container::-webkit-scrollbar {
-  display: none;
+  width: 0;
+}
+
+.chat-container::-webkit-scrollbar {
+  width: 0;
+}
+
+.mensagens-enviadas-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .mensagens-enviadas {
-  margin: 10rem 0;
+  margin: -1rem 0;
   text-align: left;
 }
 
+
 .mensagens-enviadas .mensagem {
-  display: flex;
-  align-items: flex-start;
-  margin-top: 20px;
-  width: 34%;
-  padding: 18px;
-  border: 1px solid #d21c1c;
-  border-radius: 43px;
-  color: var(--text-color);
-  text-align: justify;
-  font-size: large;
-  position: relative;
-  bottom: 8rem;
-  left: 3rem;
-  border-bottom-left-radius: 0px;
+  margin-top: -3rem;
+  width: 28%;
+  bottom: -20rem;
+  left: 81rem;
+  border-bottom-right-radius: 0px;
 }
 
-.mensagens-enviadas .mensagem-texto {
-  flex: 1;
+.btn-remove {
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .btn {
@@ -159,9 +178,9 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.5s, border-color 0.5s;
-  margin-left: -3rem;
   position: relative;
-  bottom: 1rem;
+  bottom: 10px;
+  left: -51rem;
 }
 
 .btn-primary:active {
@@ -178,11 +197,9 @@
   0% {
     transform: scale(1);
   }
-
   50% {
     transform: scale(1.05);
   }
-
   100% {
     transform: scale(1);
   }
@@ -208,14 +225,13 @@
   animation: spin 2s linear infinite;
   display: inline-block;
   left: -24px;
-  bottom: 2rem;
+  bottom: 4rem;
 }
 
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
@@ -276,15 +292,15 @@ h5 {
   .pesquisa {
     width: 88%;
     font-size: 15px;
-    bottom: 6rem;
-    left: 40%;
+    left: 41%;
     transform: translateX(-50%);
+    top: -4rem;
   }
 
   .resposta {
-    width: 80%;
+    width: 81%;
     margin-bottom: 8rem;
-    top: -2rem;
+    top: 7rem;
     font-size: small;
     left: -1rem;
   }
@@ -331,15 +347,15 @@ h5 {
 
   .img-resposta {
     bottom: -7rem;
-    right: -1rem;
+    right: 19rem;
     background-image: url("/assets/images/bot.png");
     width: 40px;
     height: 11rem;
   }
 
   .img-usuario {
-    bottom: -6rem;
-    right: 10rem;
+    bottom: -7rem;
+    right: -2rem;
     background-image: url("/assets/images/usuario.png");
     height: 11rem;
   }
@@ -350,11 +366,30 @@ h5 {
   }
 
   .mensagens-enviadas .mensagem {
-    left: 2rem;
+    left: 0rem;
+    width: 75%;
   }
 
   .mensagens-enviadas {
-    margin: 5rem 0;
+    margin: 2rem 0;
+  }
+
+  .chat-container {
+    max-height: 70vh;
+    margin-bottom: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .mensagens-enviadas .mensagem {
+    margin-top: -3rem;
+    width: 81%;
+    bottom: -3rem;
+    left: 0rem;
+    border-bottom-right-radius: 0px;
+    font-size: small;
   }
 
 }
