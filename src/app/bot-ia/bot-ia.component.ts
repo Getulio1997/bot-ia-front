@@ -38,10 +38,9 @@ export class BotIaComponent implements OnInit {
     }, 0);
   }
 
-
   corAlterado() {
     this.isDarkMode = !this.isDarkMode;
-    localStorage.setItem('darkMode', this.isDarkMode.toString());
+    localStorage.setItem('darkMode', this.isDarkMode ? 'true' : 'false');
     this.aplicaTema();
   }
 

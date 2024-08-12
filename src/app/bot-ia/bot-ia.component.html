@@ -10,9 +10,11 @@
 <body [ngClass]="{ 'dark-mode': isDarkMode }">
   <div class="background-image-container" alt="Logo Bot"></div>
   <div class="container">
-    <button (click)="corAlterado()" class="btn-toggle-theme">
-      {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
-    </button>
+
+    <label class="switch">
+      <input type="checkbox" [checked]="isDarkMode" (change)="corAlterado()">
+      <span class="slider round"></span>
+    </label>
 
     <div class="chat-container" #chatContainer>
       <div *ngFor="let item of mensagens; let i = index" class="mensagens-enviadas">
