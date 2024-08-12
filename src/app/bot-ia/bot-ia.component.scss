@@ -1,3 +1,4 @@
+// Onde tá todo o form
 .container {
   position: fixed;
   bottom: 60px;
@@ -7,6 +8,7 @@
   font-size: 13px;
 }
 
+// Melhora o chat de pesquisa
 .pesquisa {
   position: relative;
   width: 80%;
@@ -49,6 +51,7 @@
   }
 }
 
+// Logo da tela de fundo
 .background-image-container {
   position: absolute;
   top: -4rem;
@@ -61,6 +64,7 @@
   opacity: 10%;
 }
 
+// Melhora o chat das mensagens tanto as respostas quanto as perguntas
 .chat-container {
   max-height: 70vh;
   margin-bottom: 20px;
@@ -76,6 +80,7 @@
   word-wrap: break-word;
 }
 
+// Melhoras as mensagens enviadas
 .resposta,
 .mensagens-enviadas .mensagem {
   margin: 10px 0;
@@ -91,6 +96,7 @@
   overflow-wrap: break-word;
 }
 
+// Melhora as respostas
 .resposta {
   margin-top: 20px;
   margin-bottom: 16rem;
@@ -114,16 +120,32 @@
   height: 11rem;
 }
 
+// Logo da resposta
 .img-resposta {
   bottom: -7rem;
   right: 39rem;
   background-image: url("/assets/images/bot.png");
 }
 
+// Logo da mensagem
 .img-usuario {
   bottom: -7rem;
   right: -1rem;
-  background-image: url("/assets/images/usuario.png");
+  background-image: url("/assets/images/mensagem.png");
+}
+
+.mensagens-enviadas {
+  margin: -1rem 0;
+  text-align: left;
+}
+
+// Melhora as mensagens
+.mensagens-enviadas .mensagem {
+  margin-top: -3rem;
+  width: 28%;
+  bottom: -20rem;
+  left: 81rem;
+  border-bottom-right-radius: 0px;
 }
 
 .mensagens-enviadas-container::-webkit-scrollbar {
@@ -139,20 +161,7 @@
   scrollbar-width: none;
 }
 
-.mensagens-enviadas {
-  margin: -1rem 0;
-  text-align: left;
-}
-
-
-.mensagens-enviadas .mensagem {
-  margin-top: -3rem;
-  width: 28%;
-  bottom: -20rem;
-  left: 81rem;
-  border-bottom-right-radius: 0px;
-}
-
+// Botão para remover as mensagens
 .btn-remove {
   background-color: transparent;
   border: none;
@@ -169,6 +178,7 @@
   display: inline-block;
 }
 
+// Melhora o Botão de enviar
 .btn-primary {
   background-color: transparent;
   border: 1px solid var(--button-border-color);
@@ -245,6 +255,54 @@ h5 {
   width: 80%;
   text-align: center;
   color: var(--text-color);
+}
+
+// Estilos para o botão deslizante
+.switch {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #7ca7c9c2;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
 
 @media (max-width: 768px) {
