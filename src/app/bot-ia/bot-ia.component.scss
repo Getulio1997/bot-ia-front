@@ -1,4 +1,4 @@
-// Onde tá todo o form
+// --- Onde tá todo o form Inicio ---
 .container {
   position: fixed;
   bottom: 60px;
@@ -7,8 +7,10 @@
   font-weight: bold;
   font-size: 13px;
 }
+// --- Onde tá todo o form Fim ---
 
-// Melhora o chat de pesquisa
+
+// ------------------- Melhora o chat de pesquisa Inicio -------------------
 .pesquisa {
   position: relative;
   width: 80%;
@@ -50,8 +52,10 @@
     border-image-width: 2.5px;
   }
 }
+// ------------------- Melhora o chat de pesquisa Fim -------------------
 
-// Logo da tela de fundo
+
+// ------------------- Logo da tela de fundo Inicio -------------------
 .background-image-container {
   position: absolute;
   top: -4rem;
@@ -63,8 +67,10 @@
   background-position: center;
   opacity: 10%;
 }
+// ------------------- Logo da tela de fundo Fim -------------------
 
-// Melhora o chat das mensagens tanto as respostas quanto as perguntas
+
+// ---------- Melhora o chat das mensagens tanto as respostas quanto as perguntas Inicio ----------
 .chat-container {
   max-height: 70vh;
   margin-bottom: 20px;
@@ -73,6 +79,8 @@
   flex-direction: column;
   padding: 10px;
 }
+// ---------- Melhora o chat das mensagens tanto as respostas quanto as perguntas Fim ----------
+
 
 .mensagem-texto,
 .resposta-texto {
@@ -80,7 +88,8 @@
   word-wrap: break-word;
 }
 
-// Melhoras as mensagens enviadas
+
+// ----- Melhora as mensagens enviadas Inicio -----
 .resposta,
 .mensagens-enviadas .mensagem {
   margin: 10px 0;
@@ -95,8 +104,10 @@
   box-sizing: border-box;
   overflow-wrap: break-word;
 }
+// ----- Melhora as mensagens enviadas Fim -----
 
-// Melhora as respostas
+
+// ----- Melhora as respostas Inicio -----
 .resposta {
   margin-top: 20px;
   margin-bottom: 16rem;
@@ -109,7 +120,10 @@
 .resposta-texto {
   flex: 1;
 }
+// ----- Melhora as respostas Fim -----
 
+
+// ----- Melhora as imagens da resposta e do usuário Inicio -----
 .img-resposta,
 .img-usuario {
   position: absolute;
@@ -119,27 +133,33 @@
   width: 40px;
   height: 11rem;
 }
+// ----- Melhora as imagens da resposta e do usuário Fim -----
 
-// Logo da resposta
+
+// ----- Logo da resposta Inicio -----
 .img-resposta {
   bottom: -7rem;
   right: 39rem;
   background-image: url("/assets/images/bot.png");
 }
+// ----- Logo da resposta Fim -----
 
-// Logo da mensagem
+
+// ----- Logo da mensagem Inicio -----
 .img-usuario {
   bottom: -7rem;
   right: -1rem;
   background-image: url("/assets/images/mensagem.png");
 }
+// ----- Logo da mensagem Fim -----
 
+
+// ------- Melhora as mensagens Inicio -------
 .mensagens-enviadas {
   margin: -1rem 0;
   text-align: left;
 }
 
-// Melhora as mensagens
 .mensagens-enviadas .mensagem {
   margin-top: -3rem;
   width: 28%;
@@ -161,24 +181,28 @@
   scrollbar-width: none;
 }
 
-// Botão para remover as mensagens
+// ------- Melhora as mensagens Fim -------
+
+
+// ------ Botão para remover as mensagens Inicio ------
 .btn-remove {
   background-color: transparent;
   border: none;
-  color: red;
   font-size: 16px;
   cursor: pointer;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: -18px;
+  right: 0px;
 }
+// ------ Botão para remover as mensagens Fim ------
 
+
+// ------ Melhora o Botão de enviar Inicio ------
 .btn {
   margin-top: 10px;
   display: inline-block;
 }
 
-// Melhora o Botão de enviar
 .btn-primary {
   background-color: transparent;
   border: 1px solid var(--button-border-color);
@@ -246,6 +270,8 @@
     transform: rotate(360deg);
   }
 }
+// ------ Melhora o Botão de enviar Fim ------
+
 
 h5 {
   position: fixed;
@@ -257,7 +283,8 @@ h5 {
   color: var(--text-color);
 }
 
-// Estilos para o botão deslizante
+
+// ---- Estiliza o botão deslizante Inicio ----
 .switch {
   position: fixed;
   top: 10px;
@@ -304,6 +331,8 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(26px);
 }
+// ---- Estiliza o botão deslizante Fim ----
+
 
 @media (max-width: 768px) {
   .pesquisa {

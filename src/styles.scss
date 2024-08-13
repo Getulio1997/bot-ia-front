@@ -9,7 +9,9 @@
   --button-active-border-color: #003766;
   --border-left-color: #00b3ff;
   --border: 4px solid #52525213;
-  --background-image: url("assets/images/luz-efeito.png");
+  --logo-background-image: url("assets/images/luz-efeito.png");
+  --message-background-color: aliceblue;
+  --botao-color: black;
 }
 
 .dark-mode {
@@ -23,6 +25,8 @@
   --button-active-border-color: #00274d;
   --border-left-color: white;
   --border: 4px solid #525252c0;
+  --message-background-color: #313131;
+  --botao-color: white;
 }
 
 body {
@@ -61,4 +65,13 @@ footer.copy {
   width: 100%;
   text-align: center;
   color: var(--text-color);
+}
+
+.resposta,
+.mensagens-enviadas .mensagem {
+  background-color: var(--message-background-color);
+}
+
+.btn-remove {
+ color: var(--botao-color);
 }
