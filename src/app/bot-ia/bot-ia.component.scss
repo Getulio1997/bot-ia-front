@@ -224,6 +224,33 @@
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
+.btn-copy {
+  display: flex;
+  position: relative;
+  left: 32rem;
+  bottom: 0px;
+  background-color: transparent;
+  border: 1px solid var(--button-border-color);
+  color: var(--button-text-color);
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.5s, border-color 0.5s;
+  font-size: 11px;
+}
+
+.btn-copy:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.btn-desabilitado {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);

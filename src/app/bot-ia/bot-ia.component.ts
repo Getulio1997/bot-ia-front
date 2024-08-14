@@ -16,6 +16,7 @@ export class BotIaComponent implements OnInit {
   isLoading: boolean = false;
   isCodigo: boolean = false;
   mensagens: Mensagem[] = [];
+  botaoCopiar: string[] = [];
 
   constructor(private botApiRestService: BotApiRestService) {}
 
@@ -25,11 +26,9 @@ export class BotIaComponent implements OnInit {
     this.aplicaTema();
 
     const mensagensStorage = localStorage.getItem('mensagens');
-    this.mensagens = mensagensStorage
-      ? JSON.parse(mensagensStorage).map(
-          (msg: any) => new Mensagem(msg.mensagem, msg.resposta)
-        )
-      : [];
+    this.mensagens = mensagensStorage? JSON.parse(mensagensStorage).map((msg: any) => new Mensagem(msg.mensagem, msg.resposta)) : [];
+
+    this.botaoCopiar = Array(this.mensagens.length).fill('Copiar Código');
   }
 
   ngAfterViewInit() {
@@ -67,8 +66,10 @@ export class BotIaComponent implements OnInit {
     if (!this.isCodigo) {
       const respostaNaoCodigo = 'Eu só comento e sugiro melhorias em código. Por favor, envie seu código.';
       this.mensagens.push(new Mensagem(inputText, respostaNaoCodigo));
+      this.botaoCopiar.push('Copiar Código');
       this.inputText = '';
       localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
+      localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
       this.scrollToBottom();
       return;
     }
@@ -77,7 +78,9 @@ export class BotIaComponent implements OnInit {
     const mensagemFormatada = this.formatarMensagem(inputText);
     const mensagemItem = new Mensagem(mensagemFormatada);
     this.mensagens.push(mensagemItem);
+    this.botaoCopiar.push('Copiar Código');
     localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
+    localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
 
     this.botApiRestService.enviarMensagem(inputText).subscribe(
       (response) => {
@@ -92,6 +95,7 @@ export class BotIaComponent implements OnInit {
         }, 100);
 
         localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
+        localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
       },
       (error) => {
         console.error('Erro ao enviar mensagem', error);
@@ -123,4 +127,23 @@ export class BotIaComponent implements OnInit {
   formatarResposta(resposta: string): string {
     return resposta;
   }
+
+  copiaCodigo(text: string, index: number) {
+    navigator.clipboard.writeText(text).then(() => {
+      this.botaoCopiar[index] = 'Copiado!';
+
+      setTimeout(() => {
+        this.botaoCopiar[index] = 'Copiar Código';
+      }, 1200);
+
+    }).catch(err => {
+      console.error('Erro ao copiar o texto: ', err);
+    });
+  }
+
+  contemCodigo(mensagem: string): boolean {
+    const padroesCodigo = /(\bclass\b|\bfunction\b|\bvar\b|\bconst\b|\blet\b|<[^>]*>|{|}|\(|\))/i;
+    return padroesCodigo.test(mensagem);
+  }
+
 }
