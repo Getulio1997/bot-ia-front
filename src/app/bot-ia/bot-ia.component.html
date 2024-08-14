@@ -31,6 +31,10 @@
           <div class="mensagem-texto" [ngClass]="{ isCodigo }">
             {{ item.resposta }}
           </div>
+          <button *ngIf="contemCodigo(item.resposta)" [class.btn-desabilitado]="!contemCodigo(item.resposta)"
+          (click)="copiaCodigo(item.resposta, i)" class="btn-copy">
+            {{ botaoCopiar[i] }}
+          </button>
         </div>
       </div>
     </div>
