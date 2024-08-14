@@ -62,10 +62,8 @@
   left: 25rem;
   width: 50%;
   height: 80%;
-  background-image: url("/assets/images/logo.png");
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 10%;
 }
 // ------------------- Logo da tela de fundo Fim -------------------
 
@@ -84,6 +82,7 @@
 
 .mensagem-texto,
 .resposta-texto {
+  font-family: monospace;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
@@ -98,11 +97,9 @@
   border-radius: 43px;
   padding: 18px;
   position: relative;
-  border: 1px solid #d21c1c;
   color: var(--text-color);
   max-width: 80%;
   box-sizing: border-box;
-  overflow-wrap: break-word;
 }
 // ----- Melhora as mensagens enviadas Fim -----
 
@@ -407,7 +404,7 @@ input:checked + .slider:before {
   }
 
   .loading-spinner {
-    top: 0;
+    top: -6rem;
     right: 0;
     padding: 1px;
   }
@@ -443,7 +440,7 @@ input:checked + .slider:before {
   .img-usuario {
     bottom: -7rem;
     right: -2rem;
-    background-image: url("/assets/images/usuario.png");
+    background-image: url("/assets/images/mensagem.png");
     height: 11rem;
   }
 
@@ -458,7 +455,7 @@ input:checked + .slider:before {
   }
 
   .mensagens-enviadas {
-    margin: 2rem 0;
+    margin: 3rem 0;
   }
 
   .chat-container {

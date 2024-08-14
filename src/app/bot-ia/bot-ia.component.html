@@ -20,20 +20,24 @@
       <div *ngFor="let item of mensagens; let i = index" class="mensagens-enviadas">
         <div class="mensagem">
           <div class="img-usuario" alt="Logo usuario"></div>
-          <div class="mensagem-texto" [innerHTML]="item.mensagem"></div>
+          <div class="mensagem-texto" [ngClass]="{ isCodigo }">
+            {{ item.mensagem }}
+          </div>
           <button (click)="removeMensagem(i)" class="btn-remove">X</button>
         </div>
 
         <div *ngIf="item.resposta" class="resposta">
-          <div class="resposta-texto" [innerHTML]="item.resposta"></div>
           <div class="img-resposta" alt="Logo bot"></div>
+          <div class="mensagem-texto" [ngClass]="{ isCodigo }">
+            {{ item.resposta }}
+          </div>
         </div>
       </div>
     </div>
 
     <span *ngIf="isLoading" class="loading-spinner"></span>
 
-    <form (ngSubmit)="enviaMensagem(inputText)">
+    <form (ngSubmit)="enviaMensagem(inputText, $event)">
       <textarea
         #textarea
         class="pesquisa"
@@ -41,7 +45,7 @@
         [(ngModel)]="inputText"
         name="search"
         (input)="ajustaAltura()"
-        (keydown.enter)="enviaMensagem(inputText)"
+        (keydown.enter)="enviaMensagem(inputText, $event)"
       ></textarea>
       <button class="btn-primary" type="submit">
         <span>Enviar</span>
