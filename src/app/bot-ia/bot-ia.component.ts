@@ -5,7 +5,7 @@ import { Mensagem } from '../../model/mensagem';
 @Component({
   selector: 'app-bot-ia',
   templateUrl: './bot-ia.component.html',
-  styleUrls: ['./bot-ia.component.scss']
+  styleUrls: ['./bot-ia.component.scss'],
 })
 export class BotIaComponent implements OnInit {
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
@@ -14,6 +14,7 @@ export class BotIaComponent implements OnInit {
   inputText: string = '';
   isDarkMode: boolean = false;
   isLoading: boolean = false;
+  isCodigo: boolean = false;
   mensagens: Mensagem[] = [];
 
   constructor(private botApiRestService: BotApiRestService) {}
@@ -24,7 +25,11 @@ export class BotIaComponent implements OnInit {
     this.aplicaTema();
 
     const mensagensStorage = localStorage.getItem('mensagens');
-    this.mensagens = mensagensStorage ? JSON.parse(mensagensStorage).map((msg: any) => new Mensagem(msg.mensagem, msg.resposta)) : [];
+    this.mensagens = mensagensStorage
+      ? JSON.parse(mensagensStorage).map(
+          (msg: any) => new Mensagem(msg.mensagem, msg.resposta)
+        )
+      : [];
   }
 
   ngAfterViewInit() {
@@ -48,18 +53,33 @@ export class BotIaComponent implements OnInit {
     document.body.classList.toggle('dark-mode', this.isDarkMode);
   }
 
-  enviaMensagem(mensagem: string) {
-    if (!mensagem.trim()) {
+  enviaMensagem(inputText: string, event: Event) {
+    if (event instanceof KeyboardEvent) {
+      event.preventDefault();
+    }
+
+    if (!inputText.trim()) {
+      return;
+    }
+
+    this.isCodigo = this.mensagemSobreCodigo(inputText);
+
+    if (!this.isCodigo) {
+      const respostaNaoCodigo = 'Eu só comento e sugiro melhorias em código. Por favor, envie seu código.';
+      this.mensagens.push(new Mensagem(inputText, respostaNaoCodigo));
+      this.inputText = '';
+      localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
+      this.scrollToBottom();
       return;
     }
 
     this.isLoading = true;
-    const mensagemFormatada = this.formatarMensagem(mensagem);
+    const mensagemFormatada = this.formatarMensagem(inputText);
     const mensagemItem = new Mensagem(mensagemFormatada);
     this.mensagens.push(mensagemItem);
     localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
 
-    this.botApiRestService.enviarMensagem(mensagem).subscribe(
+    this.botApiRestService.enviarMensagem(inputText).subscribe(
       (response) => {
         mensagemItem.resposta = this.formatarResposta(response.resposta);
         this.inputText = '';
@@ -80,6 +100,11 @@ export class BotIaComponent implements OnInit {
     );
   }
 
+  mensagemSobreCodigo(mensagem: string): boolean {
+    const padroesCodigo = /(\bclass\b|\bfunction\b|\bvar\b|\bconst\b|\blet\b|<[^>]*>|{|}|\(|\))/i;
+    return padroesCodigo.test(mensagem);
+  }
+
   removeMensagem(index: number) {
     this.mensagens.splice(index, 1);
     localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
@@ -91,12 +116,11 @@ export class BotIaComponent implements OnInit {
     textarea.style.height = `${Math.max(textarea.scrollHeight, 2 * parseFloat(getComputedStyle(textarea).fontSize))}px`;
   }
 
-  formatarResposta(resposta: string): string {
-    return resposta.replace(/\n/g, '<br>').replace(/```(.*?)```/gs, '<pre>$1</pre>');
-  }
-
   formatarMensagem(mensagem: string): string {
-    return mensagem.replace(/\n/g, '<br>').replace(/```(.*?)```/gs, '<pre>$1</pre>');
+    return mensagem;
   }
 
+  formatarResposta(resposta: string): string {
+    return resposta;
+  }
 }
