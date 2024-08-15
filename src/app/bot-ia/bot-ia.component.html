@@ -51,7 +51,7 @@
         placeholder="Coloque seu código"
         [(ngModel)]="inputText"
         name="search"
-        (input)="ajustaAltura()"
+        (input)="resetTextarea()"
         (keydown.enter)="enviaMensagem(inputText, $event)"
       ></textarea>
       <button class="btn-primary" type="submit">

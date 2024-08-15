@@ -397,14 +397,13 @@ input:checked + .slider:before {
     margin-bottom: 20rem;
     font-size: large;
     left: 4rem;
-    bottom: -22rem;
+    bottom: -12rem;
   }
 
   .btn-primary {
     width: 8%;
     font-size: 14px;
-    left: -41%;
-    transform: translateX(-50%);
+    left: -45%;
   }
 
   .btn-toggle-theme {
@@ -426,8 +425,10 @@ input:checked + .slider:before {
   }
 
   .background-image-container {
-    left: 34%;
+    position: absolute;
+    left: 32%;
     width: 30%;
+    bottom: 20rem;
     background-size: contain;
   }
 
@@ -463,7 +464,7 @@ input:checked + .slider:before {
 
   .mensagens-enviadas .mensagem {
     width: 40%;
-    bottom: -22rem;
+    bottom: -10rem;
     left: 48rem;
   }
 
@@ -474,6 +475,11 @@ input:checked + .slider:before {
   .scroll-down {
     bottom: 13rem;
     right: 48rem;
+  }
+
+  .scroll-down.hidden {
+    opacity: 0;
+    pointer-events: none;
   }
 
 }
@@ -529,8 +535,10 @@ input:checked + .slider:before {
   }
 
   .background-image-container {
+    position: absolute;
     left: 1rem;
     width: 85%;
+    bottom: 38rem;
     background-size: contain;
   }
 

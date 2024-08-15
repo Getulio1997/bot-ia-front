@@ -27,7 +27,7 @@ export class BotIaComponent implements OnInit {
     this.aplicaTema();
 
     const mensagensStorage = localStorage.getItem('mensagens');
-    this.mensagens = mensagensStorage? JSON.parse(mensagensStorage).map((msg: any) => new Mensagem(msg.mensagem, msg.resposta)) : [];
+    this.mensagens = mensagensStorage ? JSON.parse(mensagensStorage).map((msg: any) => new Mensagem(msg.mensagem, msg.resposta)) : [];
 
     this.botaoCopiar = Array(this.mensagens.length).fill('Copiar Código');
   }
@@ -39,23 +39,29 @@ export class BotIaComponent implements OnInit {
     }, 0);
   }
 
-  @HostListener('window:resize', [])
-  onResize() {
+  @HostListener('window:mousemove', ['$event'])
+  onMouseMove() {
     this.verificaScroll();
   }
 
   ngAfterViewInit() {
     this.scrollToBottom();
     this.chatContainer.nativeElement.addEventListener('scroll', this.verificaScroll.bind(this));
+    setTimeout(() => {
+      this.verificaScroll();
+    }, 1000);
   }
 
   verificaScroll() {
     const container = this.chatContainer.nativeElement;
     const hasScrolled = container.scrollHeight - container.scrollTop > container.clientHeight + 100;
+
     this.showScrollButton = hasScrolled;
+
+    if (!hasScrolled) {
+      this.showScrollButton = false;
+    }
   }
-
-
 
   corAlterado() {
     this.isDarkMode = !this.isDarkMode;
@@ -83,9 +89,10 @@ export class BotIaComponent implements OnInit {
       this.mensagens.push(new Mensagem(inputText, respostaNaoCodigo));
       this.botaoCopiar.push('Copiar Código');
       this.inputText = '';
+      this.scrollToBottom();
+      this.resetTextarea();
       localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
       localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
-      this.scrollToBottom();
       return;
     }
 
@@ -103,10 +110,7 @@ export class BotIaComponent implements OnInit {
         this.inputText = '';
         this.isLoading = false;
         this.scrollToBottom();
-        this.ajustaAltura();
-        setTimeout(() => {
-          this.textarea.nativeElement.style.height = '';
-        }, 100);
+        this.resetTextarea();
         localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
         localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
       },
@@ -117,7 +121,6 @@ export class BotIaComponent implements OnInit {
     );
   }
 
-
   mensagemSobreCodigo(mensagem: string): boolean {
     const padroesCodigo = /(\bclass\b|\bfunction\b|\bif\b|\belse\b|\bfor\b|\bwhile\b|\bdo\b|\breturn\b|\bimport\b|\bexport\b|\bnew\b|\bthis\b|\btry\b|\bcatch\b|\bthrow\b|\bfinally\b|\bconst\b|\blet\b|\bvar\b|<\/?[a-z][^>]*>|[{[\]}();]|=>|\bconsole\.log\b|\btypeof\b|\binstanceof\b|\bnull\b|\bundefined\b)/i;
     return padroesCodigo.test(mensagem);
@@ -126,12 +129,17 @@ export class BotIaComponent implements OnInit {
   removeMensagem(index: number) {
     this.mensagens.splice(index, 1);
     localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
+    setTimeout(() => {
+      this.verificaScroll();
+    }, 0);
   }
 
-  ajustaAltura() {
+  resetTextarea() {
     const textarea = this.textarea.nativeElement;
     textarea.style.height = 'auto';
-    textarea.style.height = `${Math.max(textarea.scrollHeight, 2 * parseFloat(getComputedStyle(textarea).fontSize))}px`;
+    setTimeout(() => {
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }, 0);
   }
 
   formatarMensagem(mensagem: string): string {
@@ -159,5 +167,4 @@ export class BotIaComponent implements OnInit {
     const padroesCodigo = /(\bclass\b|\bfunction\b|\bvar\b|\bconst\b|\blet\b|<[^>]*>|{|}|\(|\))/i;
     return padroesCodigo.test(mensagem);
   }
-
 }
