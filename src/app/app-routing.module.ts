@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BotIaComponent } from './bot-ia/bot-ia.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/bot-ia', pathMatch: 'full' },
-  { path: 'bot-ia', component: BotIaComponent }
+  { path: '', redirectTo: '/AnalytiCode', pathMatch: 'full' },
+  { path: 'AnalytiCode', component: BotIaComponent }
 ];
 
 @NgModule({

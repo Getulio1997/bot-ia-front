@@ -58,10 +58,10 @@
 // ------------------- Logo da tela de fundo Inicio -------------------
 .background-image-container {
   position: absolute;
-  top: -9rem;
+  top: -45rem;
   left: 28rem;
   width: 50%;
-  height: 80%;
+  height: 20rem;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -110,7 +110,7 @@
   margin-bottom: 16rem;
   width: 34%;
   left: 9rem;
-  bottom: -20rem;
+  bottom: -30rem;
   border-bottom-left-radius: 0px;
 }
 
@@ -160,7 +160,7 @@
 .mensagens-enviadas .mensagem {
   margin-top: -3rem;
   width: 28%;
-  bottom: -20rem;
+  bottom: -30rem;
   left: 60%;
   border-bottom-right-radius: 0px;
 }
@@ -369,9 +369,9 @@ input:checked + .slider:before {
   .resposta {
     width: 40%;
     margin-bottom: 20rem;
-    font-size: 14px;
+    font-size: large;
     left: 4rem;
-    top: 13rem;
+    bottom: -22rem;
   }
 
   .btn-primary {
@@ -400,10 +400,9 @@ input:checked + .slider:before {
   }
 
   .background-image-container {
-    top: -6rem;
+    top: -35rem;
     left: 34%;
     width: 30%;
-    height: 60%;
     background-size: contain;
   }
 
@@ -431,7 +430,7 @@ input:checked + .slider:before {
   }
 
   .chat-container {
-    max-height: 60vh;
+    max-height: 70vh;
     margin-bottom: 0rem;
     overflow-y: auto;
     padding: 10px;
@@ -439,7 +438,7 @@ input:checked + .slider:before {
 
   .mensagens-enviadas .mensagem {
     width: 40%;
-    bottom: -13rem;
+    bottom: -22rem;
     left: 48rem;
   }
 
@@ -499,8 +498,8 @@ input:checked + .slider:before {
   }
 
   .background-image-container {
-    top: -10rem;
-    left: 7%;
+    top: -45rem;
+    left: 1rem;
     width: 85%;
     background-size: contain;
   }
