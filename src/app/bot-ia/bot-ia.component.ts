@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { BotApiRestService } from './../../service/bot-api-rest.service';
 import { Mensagem } from '../../model/mensagem';
 
@@ -17,6 +17,7 @@ export class BotIaComponent implements OnInit {
   isCodigo: boolean = false;
   mensagens: Mensagem[] = [];
   botaoCopiar: string[] = [];
+  showScrollButton: boolean = false;
 
   constructor(private botApiRestService: BotApiRestService) {}
 
@@ -31,16 +32,30 @@ export class BotIaComponent implements OnInit {
     this.botaoCopiar = Array(this.mensagens.length).fill('Copiar Código');
   }
 
-  ngAfterViewInit() {
-    this.scrollToBottom();
-  }
-
   scrollToBottom() {
     setTimeout(() => {
       const container = this.chatContainer.nativeElement;
       container.scrollTop = container.scrollHeight;
     }, 0);
   }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.verificaScroll();
+  }
+
+  ngAfterViewInit() {
+    this.scrollToBottom();
+    this.chatContainer.nativeElement.addEventListener('scroll', this.verificaScroll.bind(this));
+  }
+
+  verificaScroll() {
+    const container = this.chatContainer.nativeElement;
+    const hasScrolled = container.scrollHeight - container.scrollTop > container.clientHeight + 100;
+    this.showScrollButton = hasScrolled;
+  }
+
+
 
   corAlterado() {
     this.isDarkMode = !this.isDarkMode;
