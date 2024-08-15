@@ -359,10 +359,10 @@ input:checked + .slider:before {
 // ------------- Deixa a tela responsiva para notebooks Inicio -------------
 @media (max-width: 1536px) and (min-width: 729.60px) {
   .pesquisa {
-    width: 80%;
+    width: 85%;
     font-size: 14px;
     bottom: 5rem;
-    left: 41%;
+    left: 44%;
     transform: translateX(-50%);
   }
 
@@ -370,14 +370,14 @@ input:checked + .slider:before {
     width: 40%;
     margin-bottom: 20rem;
     font-size: 14px;
-    left: 0rem;
+    left: 4rem;
+    top: 13rem;
   }
 
   .btn-primary {
     width: 8%;
-    padding: 10px;
     font-size: 14px;
-    left: -38%;
+    left: -41%;
     transform: translateX(-50%);
   }
 
@@ -440,8 +440,7 @@ input:checked + .slider:before {
   .mensagens-enviadas .mensagem {
     width: 40%;
     bottom: -18rem;
-    left: 55rem;
-    border-bottom-right-radius: 0px;
+    left: 48rem;
   }
 
   .btn-copy {
