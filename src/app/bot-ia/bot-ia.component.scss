@@ -58,10 +58,9 @@
 // ------------------- Logo da tela de fundo Inicio -------------------
 .background-image-container {
   position: absolute;
-  top: -45rem;
   left: 28rem;
   width: 50%;
-  height: 20rem;
+  height: 15rem;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -427,7 +426,6 @@ input:checked + .slider:before {
   }
 
   .background-image-container {
-    top: -35rem;
     left: 34%;
     width: 30%;
     background-size: contain;
@@ -531,7 +529,6 @@ input:checked + .slider:before {
   }
 
   .background-image-container {
-    top: -45rem;
     left: 1rem;
     width: 85%;
     background-size: contain;
@@ -550,13 +547,10 @@ input:checked + .slider:before {
     margin-bottom: 0rem;
   }
 
-  .mensagens-enviadas .mensagem {
-    left: 0rem;
-    width: 75%;
-  }
-
   .mensagens-enviadas {
-    margin: 3rem 0;
+    position: relative;
+    margin: 1rem 0;
+    bottom: -20rem;
   }
 
   .chat-container {
