@@ -37,17 +37,17 @@
 
 @keyframes glowingBorder {
   0% {
-    border-image-source: linear-gradient(to right, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8);
+    border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
     border-image-slice: 1;
     border-image-width: 1px;
   }
   50% {
-    border-image-source: linear-gradient(to right, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8);
+    border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
     border-image-slice: 1;
     border-image-width: 2.5px;
   }
   100% {
-    border-image-source: linear-gradient(to right, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8);
+    border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
     border-image-slice: 1;
     border-image-width: 2.5px;
   }
@@ -439,7 +439,7 @@ input:checked + .slider:before {
 
   .mensagens-enviadas .mensagem {
     width: 40%;
-    bottom: -18rem;
+    bottom: -13rem;
     left: 48rem;
   }
 
