@@ -89,11 +89,9 @@ export class BotIaComponent implements OnInit {
         this.isLoading = false;
         this.scrollToBottom();
         this.ajustaAltura();
-
         setTimeout(() => {
           this.textarea.nativeElement.style.height = '';
         }, 100);
-
         localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
         localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
       },
@@ -104,8 +102,9 @@ export class BotIaComponent implements OnInit {
     );
   }
 
+
   mensagemSobreCodigo(mensagem: string): boolean {
-    const padroesCodigo = /(\bclass\b|\bfunction\b|\bvar\b|\bconst\b|\blet\b|<[^>]*>|{|}|\(|\))/i;
+    const padroesCodigo = /(\bclass\b|\bfunction\b|\bif\b|\belse\b|\bfor\b|\bwhile\b|\bdo\b|\breturn\b|\bimport\b|\bexport\b|\bnew\b|\bthis\b|\btry\b|\bcatch\b|\bthrow\b|\bfinally\b|\bconst\b|\blet\b|\bvar\b|<\/?[a-z][^>]*>|[{[\]}();]|=>|\bconsole\.log\b|\btypeof\b|\binstanceof\b|\bnull\b|\bundefined\b)/i;
     return padroesCodigo.test(mensagem);
   }
 
