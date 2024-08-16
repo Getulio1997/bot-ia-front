@@ -61,6 +61,7 @@
   left: 28rem;
   width: 50%;
   height: 15rem;
+  bottom: 25rem;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -69,7 +70,7 @@
 
 // ---------- Melhora o chat das mensagens tanto as respostas quanto as perguntas Inicio ----------
 .chat-container {
-  max-height: 70vh;
+  max-height: 75vh;
   margin-bottom: 20px;
   overflow-y: auto;
   display: flex;
@@ -109,8 +110,8 @@
   margin-bottom: 16rem;
   width: 34%;
   left: 9rem;
-  bottom: -30rem;
-  border-bottom-left-radius: 0px;
+  bottom: -33rem;
+  border-bottom-left-radius: 0;
 }
 
 .resposta-texto {
@@ -159,9 +160,9 @@
 .mensagens-enviadas .mensagem {
   margin-top: -3rem;
   width: 28%;
-  bottom: -30rem;
+  bottom: -32rem;
   left: 60%;
-  border-bottom-right-radius: 0px;
+  border-bottom-right-radius: 0;
 }
 
 .mensagens-enviadas-container::-webkit-scrollbar {
@@ -397,7 +398,7 @@ input:checked + .slider:before {
     width: 40%;
     margin-bottom: 20rem;
     font-size: large;
-    left: 4rem;
+    left: 5rem;
     bottom: -12rem;
   }
 
@@ -538,7 +539,7 @@ input:checked + .slider:before {
     position: absolute;
     left: 1rem;
     width: 85%;
-    bottom: 38rem;
+    bottom: 25rem;
     background-size: contain;
   }
 
