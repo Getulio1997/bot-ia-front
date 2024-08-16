@@ -128,12 +128,11 @@ export class BotIaComponent implements OnInit {
         if (this.mensagemSobreCodigo(response.resposta)) {
           mensagemItem.resposta = this.formatarResposta(response.resposta);
         } else {
-          mensagemItem.resposta = 'A resposta não está relacionada ao código.';
+          mensagemItem.resposta = 'A pergunta não está relacionada ao código.';
         }
         this.resetEstado();
       },
       (error) => {
-        console.error('Erro ao enviar mensagem', error);
         if (error.status === 400) {
           this.mensagens = this.mensagens.filter(msg => msg.mensagem !== mensagemItem.mensagem);
           this.botaoCopiar.pop();
