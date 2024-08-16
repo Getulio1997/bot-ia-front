@@ -22,13 +22,42 @@ export class BotIaComponent implements OnInit {
   constructor(private botApiRestService: BotApiRestService) {}
 
   ngOnInit() {
+    this.loadSettings();
+    this.loadMessages();
+  }
+
+  private addMessage(inputText: string, resposta: string) {
+    this.mensagens.push(new Mensagem(inputText, resposta));
+    this.botaoCopiar.push('Copiar Código');
+    this.inputText = '';
+    this.scrollToBottom();
+    this.resetTextarea();
+    this.saveToLocalStorage();
+  }
+
+  private resetEstado() {
+    this.inputText = '';
+    this.isLoading = false;
+    this.scrollToBottom();
+    this.resetTextarea();
+    this.saveToLocalStorage();
+  }
+
+
+  private saveToLocalStorage() {
+    localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
+    localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
+  }
+
+  private loadSettings() {
     const darkModeSetting = localStorage.getItem('darkMode');
     this.isDarkMode = darkModeSetting === 'true';
     this.aplicaTema();
+  }
 
+  private loadMessages() {
     const mensagensStorage = localStorage.getItem('mensagens');
     this.mensagens = mensagensStorage ? JSON.parse(mensagensStorage).map((msg: any) => new Mensagem(msg.mensagem, msg.resposta)) : [];
-
     this.botaoCopiar = Array(this.mensagens.length).fill('Copiar Código');
   }
 
@@ -49,18 +78,14 @@ export class BotIaComponent implements OnInit {
     this.chatContainer.nativeElement.addEventListener('scroll', this.verificaScroll.bind(this));
     setTimeout(() => {
       this.verificaScroll();
+      this.resetTextarea();
     }, 1000);
   }
 
+
   verificaScroll() {
     const container = this.chatContainer.nativeElement;
-    const hasScrolled = container.scrollHeight - container.scrollTop > container.clientHeight + 100;
-
-    this.showScrollButton = hasScrolled;
-
-    if (!hasScrolled) {
-      this.showScrollButton = false;
-    }
+    this.showScrollButton = container.scrollHeight - container.scrollTop > container.clientHeight + 100;
   }
 
   corAlterado() {
@@ -85,50 +110,51 @@ export class BotIaComponent implements OnInit {
     this.isCodigo = this.mensagemSobreCodigo(inputText);
 
     if (!this.isCodigo) {
-      const respostaNaoCodigo = 'Eu só comento e sugiro melhorias em código. Por favor, envie seu código.';
-      this.mensagens.push(new Mensagem(inputText, respostaNaoCodigo));
-      this.botaoCopiar.push('Copiar Código');
-      this.inputText = '';
-      this.scrollToBottom();
+      this.addMessage(inputText, 'Eu só comento e sugiro melhorias em código. Por favor, envie seu código.');
       this.resetTextarea();
-      localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
-      localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
       return;
     }
 
-    this.isLoading = true;
     const mensagemFormatada = this.formatarMensagem(inputText);
     const mensagemItem = new Mensagem(mensagemFormatada);
     this.mensagens.push(mensagemItem);
     this.botaoCopiar.push('Copiar Código');
-    localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
-    localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
+    this.saveToLocalStorage();
+
+    this.isLoading = true;
 
     this.botApiRestService.enviarMensagem(inputText).subscribe(
       (response) => {
-        mensagemItem.resposta = this.formatarResposta(response.resposta);
-        this.inputText = '';
-        this.isLoading = false;
-        this.scrollToBottom();
-        this.resetTextarea();
-        localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
-        localStorage.setItem('botaoCopiar', JSON.stringify(this.botaoCopiar));
+        if (this.mensagemSobreCodigo(response.resposta)) {
+          mensagemItem.resposta = this.formatarResposta(response.resposta);
+        } else {
+          mensagemItem.resposta = 'A resposta não está relacionada ao código.';
+        }
+        this.resetEstado();
       },
       (error) => {
         console.error('Erro ao enviar mensagem', error);
-        this.isLoading = false;
+        if (error.status === 400) {
+          this.mensagens = this.mensagens.filter(msg => msg.mensagem !== mensagemItem.mensagem);
+          this.botaoCopiar.pop();
+          this.addMessage(inputText, 'Eu só comento e sugiro melhorias em código. Por favor, envie seu código.');
+        } else {
+          this.addMessage(inputText, 'Ocorreu um erro ao processar sua solicitação. Tente novamente mais tarde.');
+        }
+        this.resetEstado();
       }
     );
   }
 
   mensagemSobreCodigo(mensagem: string): boolean {
-    const padroesCodigo = /(\bclass\b|\bfunction\b|\bif\b|\belse\b|\bfor\b|\bwhile\b|\bdo\b|\breturn\b|\bimport\b|\bexport\b|\bnew\b|\bthis\b|\btry\b|\bcatch\b|\bthrow\b|\bfinally\b|\bconst\b|\blet\b|\bvar\b|<\/?[a-z][^>]*>|[{[\]}();]|=>|\bconsole\.log\b|\btypeof\b|\binstanceof\b|\bnull\b|\bundefined\b)/i;
-    return padroesCodigo.test(mensagem);
+    const padroesCodigo = /(\bclass\b|\bfunction\b|\bif\b|\belse\b|\bfor\b|\bwhile\b|\bconst\b|\blet\b|\bvar\b|<\/?[^>]+>|\{|\}|\(|\)|\[|\])/i;
+    const termosContexto = /\b(código|programação|script|erro|debug)\b/i;
+    return padroesCodigo.test(mensagem) || termosContexto.test(mensagem);
   }
 
   removeMensagem(index: number) {
     this.mensagens.splice(index, 1);
-    localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
+    this.saveToLocalStorage();
     setTimeout(() => {
       this.verificaScroll();
     }, 0);
@@ -141,6 +167,7 @@ export class BotIaComponent implements OnInit {
       textarea.style.height = `${textarea.scrollHeight}px`;
     }, 0);
   }
+
 
   formatarMensagem(mensagem: string): string {
     return mensagem;

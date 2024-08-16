@@ -44,12 +44,12 @@
   50% {
     border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
     border-image-slice: 1;
-    border-image-width: 2.5px;
+    border-image-width: 1px;
   }
   100% {
     border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
     border-image-slice: 1;
-    border-image-width: 2.5px;
+    border-image-width: 1px;
   }
 }
 // ------------------- Melhora o chat de pesquisa Fim -------------------
@@ -388,8 +388,9 @@ input:checked + .slider:before {
     width: 85%;
     font-size: 14px;
     bottom: 5rem;
-    left: 44%;
-    transform: translateX(-50%);
+    left: 2%;
+    min-height: 4rem;
+    max-height: 20rem;
   }
 
   .resposta {
@@ -417,7 +418,6 @@ input:checked + .slider:before {
     font-size: 14px;
     bottom: 3%;
     left: 49%;
-    transform: translateX(-50%);
   }
 
   .container {
