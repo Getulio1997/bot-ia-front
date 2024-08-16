@@ -20,10 +20,12 @@ jobs:
           node-version: '20.15.1'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -g @angular/cli
 
       - name: Build the project
-        run: npm run build -- --configuration production
+        run: npx ng build --configuration production
 
       - name: Deploy AnalytiCode
         env:
