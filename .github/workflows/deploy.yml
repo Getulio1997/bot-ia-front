@@ -1,0 +1,38 @@
+name: Deploy AnalytiCode
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.15.1'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build -- --configuration production
+
+      - name: Deploy AnalytiCode
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          curl -X POST \
+          -H 'Authorization: Bearer $RENDER_API_KEY' \
+          -H 'Content-Type: application/json' \
+          -d '{
+            "serviceId": "your-service-id",  # Substitua pelo seu service ID do Render
+            "branch": "main"                # ou a branch que você deseja fazer o deploy
+          }' \
+          https://api.render.com/v1/services/your-service-id/deploys # Substitua pelo seu endpoint de deploy do Render
