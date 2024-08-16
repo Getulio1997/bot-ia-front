@@ -5,4 +5,4 @@ services:
     buildCommand: |
       npm install
       npx ng build --configuration production
-    startCommand: npx serve ./dist/bot-ia/browser -l $PORT
+    startCommand: npx serve ./dist/bot-ia/browser -p 4200
