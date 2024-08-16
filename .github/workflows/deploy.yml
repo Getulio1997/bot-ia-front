@@ -33,7 +33,7 @@ jobs:
           -H 'Authorization: Bearer $RENDER_API_KEY' \
           -H 'Content-Type: application/json' \
           -d '{
-            "serviceId": "your-service-id",  # Substitua pelo seu service ID do Render
-            "branch": "main"                # ou a branch que você deseja fazer o deploy
+            "serviceId": "$SERVICE_ID",
+            "branch": "main"
           }' \
-          https://api.render.com/v1/services/your-service-id/deploys # Substitua pelo seu endpoint de deploy do Render
+          https://api.render.com/v1/services/$SERVICE_ID/deploys
