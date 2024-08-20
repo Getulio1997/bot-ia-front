@@ -10,7 +10,6 @@ import { Mensagem } from '../../model/mensagem';
 export class BotIaComponent implements OnInit {
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('chatContainer') chatContainer!: ElementRef<HTMLDivElement>;
-
   inputText: string = '';
   isDarkMode: boolean = false;
   isLoading: boolean = false;
@@ -24,6 +23,7 @@ export class BotIaComponent implements OnInit {
   ngOnInit() {
     this.loadSettings();
     this.loadMessages();
+    this.initializeGlowingBorder();
   }
 
   private addMessage(inputText: string, resposta: string) {
@@ -42,7 +42,6 @@ export class BotIaComponent implements OnInit {
     this.resetTextarea();
     this.saveToLocalStorage();
   }
-
 
   private saveToLocalStorage() {
     localStorage.setItem('mensagens', JSON.stringify(this.mensagens));
@@ -75,13 +74,13 @@ export class BotIaComponent implements OnInit {
 
   ngAfterViewInit() {
     this.scrollToBottom();
+    this.initializeGlowingBorder();
     this.chatContainer.nativeElement.addEventListener('scroll', this.verificaScroll.bind(this));
     setTimeout(() => {
       this.verificaScroll();
       this.resetTextarea();
     }, 1000);
   }
-
 
   verificaScroll() {
     const container = this.chatContainer.nativeElement;
@@ -121,6 +120,9 @@ export class BotIaComponent implements OnInit {
     this.botaoCopiar.push('Copiar Código');
     this.saveToLocalStorage();
 
+    this.inputText = '';
+    this.resetTextarea();
+
     this.isLoading = true;
 
     this.botApiRestService.enviarMensagem(inputText).subscribe(
@@ -145,6 +147,7 @@ export class BotIaComponent implements OnInit {
     );
   }
 
+
   mensagemSobreCodigo(mensagem: string): boolean {
     const padroesCodigo = /(\bclass\b|\bfunction\b|\bif\b|\belse\b|\bfor\b|\bwhile\b|\bconst\b|\blet\b|\bvar\b|<\/?[^>]+>|\{|\}|\(|\)|\[|\])/i;
     const termosContexto = /\b(código|programação|script|erro|debug)\b/i;
@@ -166,7 +169,6 @@ export class BotIaComponent implements OnInit {
       textarea.style.height = `${textarea.scrollHeight}px`;
     }, 0);
   }
-
 
   formatarMensagem(mensagem: string): string {
     return mensagem;
@@ -192,5 +194,29 @@ export class BotIaComponent implements OnInit {
   contemCodigo(mensagem: string): boolean {
     const padroesCodigo = /(\bclass\b|\bfunction\b|\bvar\b|\bconst\b|\blet\b|<[^>]*>|{|}|\(|\))/i;
     return padroesCodigo.test(mensagem);
+  }
+
+  private initializeGlowingBorder() {
+    if (!this.textarea) return;
+
+    const textarea = this.textarea.nativeElement;
+
+    textarea.addEventListener('input', () => {
+      if (textarea.value !== '') {
+        textarea.classList.add('glowing');
+      } else {
+        textarea.classList.remove('glowing');
+      }
+    });
+
+    textarea.addEventListener('blur', () => {
+      textarea.classList.remove('glowing');
+    });
+
+    textarea.addEventListener('focus', () => {
+      if (textarea.value !== '') {
+        textarea.classList.add('glowing');
+      }
+    });
   }
 }
