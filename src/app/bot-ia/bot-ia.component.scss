@@ -13,59 +13,46 @@
 // ------------------- Melhora o chat de pesquisa Inicio -------------------
 .pesquisa {
   position: relative;
+  font-family: sans-serif;
+  font-weight: 100;
   width: 80%;
   font-size: 15px;
   padding: 10px;
   resize: none;
   min-height: 2rem;
   max-height: 20rem;
-  border: 5px solid var(--border-color);
-  border-radius: 10px;
-  box-shadow: 0 0 0 rgba(255, 255, 255, 0.5);
-  background-color: var(--background-color);
-  color: var(--text-color);
+  border-radius: 15px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   bottom: 1rem;
   box-sizing: border-box;
   top: -3rem;
+  border: 1.5px solid var(--pesquisa-border-color);
+  background-origin: border-box;
+  background-clip: padding-box;
+}
+
+.pesquisa.glowing {
   animation: glowingBorder 3s linear infinite;
+}
+
+@keyframes glowingBorder {
+  0%, 100% {
+    border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
+    border-image-slice: 1;
+    border-radius: 10px;
+  }
+  50% {
+    border-image-source: linear-gradient(to left, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
+    border-image-slice: 1;
+    border-radius: 10px;
+  }
 }
 
 .pesquisa:focus {
   outline: none;
 }
-
-@keyframes glowingBorder {
-  0% {
-    border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
-    border-image-slice: 1;
-    border-image-width: 1px;
-  }
-  50% {
-    border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
-    border-image-slice: 1;
-    border-image-width: 1px;
-  }
-  100% {
-    border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
-    border-image-slice: 1;
-    border-image-width: 1px;
-  }
-}
 // ------------------- Melhora o chat de pesquisa Fim -------------------
 
-
-// ------------------- Logo da tela de fundo Inicio -------------------
-.background-image-container {
-  position: absolute;
-  left: 28rem;
-  width: 50%;
-  height: 15rem;
-  bottom: 25rem;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-// ------------------- Logo da tela de fundo Fim -------------------
 
 
 // ---------- Melhora o chat das mensagens tanto as respostas quanto as perguntas Inicio ----------
@@ -82,7 +69,8 @@
 
 .mensagem-texto,
 .resposta-texto {
-  font-family: monospace;
+  font-family: math;
+  font-weight: 100;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
@@ -112,6 +100,7 @@
   left: 9rem;
   bottom: -33rem;
   border-bottom-left-radius: 0;
+  padding: 30px;
 }
 
 .resposta-texto {
@@ -163,6 +152,7 @@
   bottom: -32rem;
   left: 60%;
   border-bottom-right-radius: 0;
+  padding: 30px;
 }
 
 .mensagens-enviadas-container::-webkit-scrollbar {
@@ -214,13 +204,16 @@
   left: -51rem;
 }
 
+.btn-primary:focus,
 .btn-primary:active {
-  animation: pulse 0.2s ease-in-out;
+  outline: none;
+  box-shadow: none;
+  animation: pulse 0s ease-in-out;
 }
 
 .btn-primary:hover {
   transform: scale(1.1);
-  background-color: #41f1b37d;
+  background-color: var(--pesquisa-background-color);
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
@@ -323,6 +316,8 @@
 
 
 h5 {
+  font-family: system-ui;
+  font-weight: 100;
   position: fixed;
   bottom: 2%;
   left: 49%;
@@ -509,6 +504,15 @@ input:checked + .slider:before {
     font-size: 16px;
     left: -1rem;
     top: -3rem;
+    background-color: var(--button-background-color); /* Adiciona a cor de fundo padrão */
+    border: 1px solid var(--button-border-color);
+  }
+
+  .btn-primary:focus,
+  .btn-primary:active {
+    outline: none;
+    box-shadow: none;
+    background-color: var(--button-background-color); /* Define a cor de fundo ao clicar */
   }
 
   .btn-toggle-theme {
