@@ -3,7 +3,7 @@
   --text-color: #000000;
   --placeholder-color: #121212b5;
   --pesquisa-border-color: #74717163;
-  --pesquisa-background-color: #ffffff6b;
+  --primary-background-color: #a7a7a740;
   --button-text-color: #444444;
   --button-border-color: #444444;
   --button-active-bg-color: #004085;
@@ -22,7 +22,7 @@
   --text-color: #e0e0e0;
   --placeholder-color: white;
   --pesquisa-border-color: #bbbbbb;
-  --pesquisa-background-color: #00000017;
+  --primary-background-color: #ffffff2e;
   --button-text-color: #e0e0e0;
   --button-border-color: #bbbbbb;
   --button-active-bg-color: #003766;
@@ -84,5 +84,9 @@ footer.copy {
 }
 
 body.dark-mode .btn-primary:hover {
-  background-color: var(--pesquisa-background-color);
+  background-color: var(--primary-background-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-background-color)
 }
