@@ -212,6 +212,7 @@
 }
 
 .btn-primary:hover {
+  background-color: var(--primary-background-color);
   transform: scale(1.1);
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
