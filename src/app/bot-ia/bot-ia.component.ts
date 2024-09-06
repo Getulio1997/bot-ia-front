@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { BotApiRestService } from './../../service/bot-api-rest.service';
 import { Mensagem } from '../../model/mensagem';
 
@@ -18,7 +18,7 @@ export class BotIaComponent implements OnInit {
   botaoCopiar: string[] = [];
   showScrollButton: boolean = false;
 
-  constructor(private botApiRestService: BotApiRestService) {}
+  constructor(private botApiRestService: BotApiRestService,  private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadSettings();
@@ -73,6 +73,9 @@ export class BotIaComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.textarea.nativeElement.addEventListener('input', () => {
+      this.resetTextarea();
+    });
     this.scrollToBottom();
     this.initializeGlowingBorder();
     this.chatContainer.nativeElement.addEventListener('scroll', this.verificaScroll.bind(this));
@@ -106,11 +109,16 @@ export class BotIaComponent implements OnInit {
       return;
     }
 
+    this.resetTextarea();
+
+    this.cdr.detectChanges();
+
+    this.inputText = '';
+
     this.isCodigo = this.mensagemSobreCodigo(inputText);
 
     if (!this.isCodigo) {
       this.addMessage(inputText, 'Eu só comento e sugiro melhorias em código. Por favor, envie seu código.');
-      this.resetTextarea();
       return;
     }
 
@@ -119,9 +127,6 @@ export class BotIaComponent implements OnInit {
     this.mensagens.push(mensagemItem);
     this.botaoCopiar.push('Copiar Código');
     this.saveToLocalStorage();
-
-    this.inputText = '';
-    this.resetTextarea();
 
     this.isLoading = true;
 
@@ -164,10 +169,12 @@ export class BotIaComponent implements OnInit {
 
   resetTextarea() {
     const textarea = this.textarea.nativeElement;
-    textarea.style.height = 'auto';
-    setTimeout(() => {
-      textarea.style.height = `${textarea.scrollHeight}px`;
-    }, 0);
+
+    requestAnimationFrame(() => {
+      textarea.style.height = 'auto';
+      const newHeight = `${textarea.scrollHeight}px`;
+      textarea.style.height = newHeight;
+    });
   }
 
   formatarMensagem(mensagem: string): string {
