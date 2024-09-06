@@ -16,6 +16,7 @@
   --logo-tela-background-image: url("/assets/images/textura.png");
   --logo-background-size: cover;
   --scroll-color: black;
+  --pesquisa-background-gradient: linear-gradient(#ffffff, #ffffff);
 }
 
 .dark-mode {
@@ -34,6 +35,7 @@
   --message-background-color: #3b3b3b;
   --botao-color: white;
   --scroll-color: white;
+  --pesquisa-background-gradient: linear-gradient(#353333, #393939);
 }
 
 body {

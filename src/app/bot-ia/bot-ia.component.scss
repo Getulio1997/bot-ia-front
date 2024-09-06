@@ -26,9 +26,10 @@
   bottom: 1rem;
   box-sizing: border-box;
   top: -3rem;
-  border: 2px solid var(--pesquisa-border-color);
-  background-origin: border-box;
-  background-clip: padding-box;
+  border: 2px solid transparent;
+  background: var(--pesquisa-background-gradient) padding-box,
+              linear-gradient(90deg, #ed6e61, #ed6e61) border-box;
+  background-clip: padding-box, border-box;
 }
 
 .pesquisa.glowing {
@@ -39,12 +40,12 @@
   0%, 100% {
     border-image-source: linear-gradient(to right, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
     border-image-slice: 1;
-    border-radius: 10px;
+    border-radius: 15px;
   }
   50% {
     border-image-source: linear-gradient(to left, #F5675F, #A85F39, #F5BA67, #750B69, #5CF595, #67F5EB, #78A09D, #A83C39);
     border-image-slice: 1;
-    border-radius: 10px;
+    border-radius: 15px;
   }
 }
 
