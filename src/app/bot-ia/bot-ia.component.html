@@ -53,9 +53,11 @@
         (input)="resetTextarea()"
         (keydown.enter)="enviaMensagem(inputText, $event)"
       ></textarea>
-      <button class="btn-primary" type="submit">
-        <span>Enviar</span>
-      </button>
+      <div class="botaoCor">
+        <button class="btn-primary" type="submit" [disabled]="!inputText || inputText.trim() === ''">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+      </div>
     </form>
   </div>
 
