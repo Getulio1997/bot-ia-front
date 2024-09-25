@@ -1,20 +1,33 @@
 .copy {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  font-weight: bold;
   font-size: 13px;
-  margin: auto;
-  margin-left: -2%;
   font-family: system-ui;
   font-weight: 100;
+  position: relative;
+  bottom: -53rem;
+  text-align: center;
+  left: -2rem;
 }
 
-@media (max-width: 768px) {
+h5 {
+  font-family: system-ui;
+  font-weight: 100;
+  font-size: 13px;
+  position: relative;
+  bottom: -15px;
+}
+
+@media (max-width: 600px) {
   .copy {
     width: 84%;
-    bottom: 18px;
-    left: 30px;
+    bottom: -50rem;
+    left: 35px;
+  }
+}
+
+@media (max-width: 1536px) and (min-width: 729.60px) {
+  .copy {
+    width: 84%;
+    bottom: -40rem;
+    left: 8%;
   }
 }
