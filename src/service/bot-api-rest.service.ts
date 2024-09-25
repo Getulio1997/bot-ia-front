@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environmentProd } from '../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BotApiRestService {
 
-  private apiUrl = 'https://bot-ia-back.onrender.com/analisa_texto';
+  private apiUrl = environmentProd.apiUrl;
 
   constructor(private http: HttpClient) {}
 

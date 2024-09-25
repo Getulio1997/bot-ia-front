@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BotIaComponent } from './bot-ia/bot-ia.component';
+import { AnalyticodeComponent } from './analyticode/analyticode.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/codeAnalyzer', pathMatch: 'full' },
-  { path: 'codeAnalyzer', component: BotIaComponent }
+  { path: '', redirectTo: '/analytiCode', pathMatch: 'full' },
+  { path: 'analytiCode', component: AnalyticodeComponent }
 ];
 
 @NgModule({

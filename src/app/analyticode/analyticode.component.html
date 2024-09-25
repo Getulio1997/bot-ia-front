@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="chat-container">
+    <div class="chat-header">AnalytiCode</div>
+
+    <div class="chat-messages" #chatContainer (scroll)="onScroll()">
+      <div *ngFor="let item of mensagens; let i = index" class="mensagem">
+        <div class="message user">
+          <img src="assets/images/mensagem.png" alt="user icon" class="user-icon">
+          <div class="message-content">
+            <div class="message-day">{{ item.dataHora | date: 'EEEE' }}</div>
+            <div class="message-date">{{ item.dataHora | date: 'dd/MM/yyyy HH:mm' }}</div> <br>
+            <pre>{{ item.mensagem }}</pre>
+
+            <div class="message-options">
+              <button class="menu-btn" (click)="toggleOptions(i)">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+              <div *ngIf="showOptions[i]" class="menu-options">
+                <ul>
+                  <li (click)="editarMensagem(i)">Editar</li>
+                  <li (click)="excluirMensagem(i)">Excluir</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="message bot">
+          <img src="assets/images/bot.png" alt="Bot icon" class="bot-icon">
+          <div class="message-content">
+            <div class="message-day">{{ item.dataHora | date: 'EEEE' }}</div>
+            <div class="message-date">{{ item.dataHora | date: 'dd/MM/yyyy HH:mm' }}</div> <br>
+            <pre>{{ item.resposta }}</pre>
+            <button class="copy-btn" (click)="copiarResposta(item.resposta, i)">
+              {{ botaoCopiar[i] || 'Copiar' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="loading-dots" *ngIf="isLoading">
+        <span></span><span></span><span></span>
+      </div>
+
+      <button *ngIf="showScrollButton" class="scroll-to-bottom" (click)="scrollToBottom()">
+        <i class="fas fa-arrow-down"></i>
+      </button>
+    </div>
+
+    <div *ngIf="sucessoMensagem" class="success-message">
+      {{ sucessoMensagem }}
+    </div>
+
+    <div class="input-container">
+      <textarea
+        placeholder="Coloque seu código ..."
+        class="chat-input"
+        #textarea
+        [(ngModel)]="inputText"
+        (keydown.enter)="enviaMensagem(inputText, $event)"
+        (input)="resetTextarea()"
+      ></textarea>
+
+      <button class="attach-btn" (click)="enviaMensagem(inputText, $event)" [disabled]="!inputText.trim() || isLoading">
+          <i class="fas fa-arrow-up" *ngIf="!isLoading"></i>
+      </button>
+    </div>
+  </div>
+</body>
+
+</html>
