@@ -67,7 +67,6 @@ export class AnalyticodeComponent implements OnInit {
       textarea.style.height = 'auto';
       textarea.style.height = `${textarea.scrollHeight}px`;
     });
-    console.log('inputText:', this.inputText);
   }
 
   scrollToBottom() {

@@ -20,7 +20,7 @@
             <pre>{{ item.mensagem }}</pre>
 
             <div class="message-options">
-              <button class="menu-btn" (click)="toggleOptions(i)">
+              <button class="menu-btn" (click)="toggleOptions(i)" title="Opções">
                 <i class="fas fa-ellipsis-h"></i>
               </button>
               <div *ngIf="showOptions[i]" class="menu-options">
