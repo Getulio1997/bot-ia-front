@@ -18,7 +18,10 @@
             <div class="message-day">{{ item.dataHora | date: 'EEEE' }}</div>
             <div class="message-date">{{ item.dataHora | date: 'dd/MM/yyyy HH:mm' }}</div> <br>
             <pre>{{ item.mensagem }}</pre>
-
+            <button class="copy-btn" (click)="copiarTexto(item.mensagem, i, 'Pergunta', 'user')">
+              <i class="icone-copy-user" [class.bi-copy]="!iconUserStates[i]" [class.bi-check2]="iconUserStates[i]"></i>
+              {{ botaoCopiarUser[i] || 'Copiar' }}
+            </button>
             <div class="message-options">
               <button class="menu-btn" (click)="toggleOptions(i)" title="Opções">
                 <i class="fas fa-ellipsis-h"></i>
@@ -39,11 +42,13 @@
             <div class="message-day">{{ item.dataHora | date: 'EEEE' }}</div>
             <div class="message-date">{{ item.dataHora | date: 'dd/MM/yyyy HH:mm' }}</div> <br>
             <pre>{{ item.resposta }}</pre>
-            <button class="copy-btn" (click)="copiarResposta(item.resposta, i)">
-              {{ botaoCopiar[i] || 'Copiar' }}
+            <button class="copy-btn" (click)="copiarTexto(item.resposta, i, 'Resposta', 'bot')">
+              <i class="icone-copy-bot" [class.bi-copy]="!iconBotStates[i]" [class.bi-check2]="iconBotStates[i]"></i>
+              {{ botaoCopiarBot[i] || 'Copiar' }}
             </button>
           </div>
         </div>
+
       </div>
 
       <div class="loading-dots" *ngIf="isLoading">
@@ -65,7 +70,6 @@
         class="chat-input"
         #textarea
         [(ngModel)]="inputText"
-        (keydown.enter)="enviaMensagem(inputText, $event)"
         (input)="resetTextarea()"
       ></textarea>
 

@@ -193,6 +193,18 @@
   opacity: 0.8;
 }
 
+.icone-copy-user {
+  position: relative;
+  top: 14px;
+  right: 36px;
+}
+
+.icone-copy-bot {
+  position: relative;
+  top: 14px;
+  right: 64%;
+}
+
 .scroll-to-bottom {
   position: fixed;
   bottom: 11rem;
@@ -285,7 +297,7 @@
     width: 100%;
     margin: 0px;
     border-radius: 0;
-    height: 88vh;
+    height: 89vh;
     margin-top: -5rem;
   }
 
@@ -304,6 +316,14 @@
 
   .attach-btn {
     width: 9%;
+  }
+
+  .icone-copy-user {
+    right: 36px;
+  }
+
+  .icone-copy-bot {
+    right: 36px;
   }
 
 }
@@ -331,9 +351,18 @@
   }
 
   .scroll-to-bottom {
-    position: fixed;
+    cursor: pointer;
     bottom: 10rem;
     right: 30rem;
-    cursor: pointer;
+  }
+
+  .icone-copy-user {
+    right: 4px;
+    top: 0px;
+  }
+
+  .icone-copy-bot {
+    right: 4px;
+    top: 0px;
   }
 }

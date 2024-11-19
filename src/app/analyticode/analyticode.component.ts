@@ -14,6 +14,10 @@ export class AnalyticodeComponent implements OnInit {
   inputText: string = '';
   mensagens: Mensagem[] = [];
   botaoCopiar: string[] = [];
+  botaoCopiarUser: string[] = [];
+  botaoCopiarBot: string[] = [];
+  iconUserStates: boolean[] = [];
+  iconBotStates: boolean[] = [];
   isLoading: boolean = false;
   showScrollButton: boolean = false;
   showOptions: boolean[] = [];
@@ -91,16 +95,28 @@ export class AnalyticodeComponent implements OnInit {
     this.mensagens = mensagensStorage ? JSON.parse(mensagensStorage) : [];
   }
 
-  copiarResposta(resposta: string | undefined, index: number) {
-    if (resposta) {
-      navigator.clipboard.writeText(resposta).then(() => {
-        console.log('Texto copiado com sucesso!');
-        this.botaoCopiar[index] = 'Copiado';
-        setTimeout(() => {
-          this.botaoCopiar[index] = 'Copiar';
-        }, 2000);
+  copiarTexto(texto: string | undefined, index: number, tipo: string, origem: string) {
+    if (texto) {
+      navigator.clipboard.writeText(texto).then(() => {
+        console.log(`${tipo} copiada com sucesso!`);
+
+        if (origem === 'user') {
+          this.iconUserStates[index] = true;
+          this.botaoCopiarUser[index] = 'Copiado';
+          setTimeout(() => {
+            this.iconUserStates[index] = false;
+            this.botaoCopiarUser[index] = 'Copiar';
+          }, 2000);
+        } else if (origem === 'bot') {
+          this.iconBotStates[index] = true;
+          this.botaoCopiarBot[index] = 'Copiado';
+          setTimeout(() => {
+            this.iconBotStates[index] = false;
+            this.botaoCopiarBot[index] = 'Copiar';
+          }, 2000);
+        }
       }).catch(err => {
-        console.error('Erro ao copiar o texto: ', err);
+        console.error('Erro ao copiar o texto:', err);
       });
     }
   }
