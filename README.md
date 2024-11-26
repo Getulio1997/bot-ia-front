@@ -1,4 +1,4 @@
-# AnalytiCode <img src="/src/assets/images/angular.png" alt="Angular CLI" width="200">
+# AnalytiCode <img src="/src/assets/images/angular.png" alt="Angular CLI" width="100" height="100">
 
 Este projeto foi gerado com o [Angular CLI](https://github.com/angular/angular-cli) versão 18.1.0.
 
