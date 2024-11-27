@@ -20,4 +20,4 @@ ng serve
 
 ## É necessário instalar o node para utilizar o npm install
 
-[Node.js](https://www.nodejs.tech/pt-br/download)
+[Baixar Node.js](https://www.nodejs.tech/pt-br/download)
