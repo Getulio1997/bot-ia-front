@@ -17,3 +17,7 @@ Execute `ng serve` para um servidor dev. Navegue até `http://localhost:4200/`. 
 ``` bash
 ng serve
 ```
+
+## É necessário instalar o node para utilizar o npm install
+
+[Node.js](https://www.nodejs.tech/pt-br/download)
