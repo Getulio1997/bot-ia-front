@@ -4,7 +4,7 @@ Este projeto foi gerado em [Angular](https://docs.python.org/pt-br/3/) versão 3
 
 ## Rodar o AnalytiCode
 
-* Intale o `node.js` [Clique para baixar](https://www.nodejs.tech/pt-br/download) 
+* Instale o `node.js` [Clique para baixar](https://www.nodejs.tech/pt-br/download) 
 * Use o comando: 
 
 ``` bash
