@@ -21,3 +21,8 @@ ng serve
 ## É necessário instalar o node para utilizar o npm install
 
 [Baixar Node.js](https://www.nodejs.tech/pt-br/download)
+
+
+## Servidor de deploy
+
+[Acessar o bot AnalytiCode](https://analyticode.onrender.com/analytiCode)
