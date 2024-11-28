@@ -38,15 +38,36 @@ export class AnalyticodeComponent implements OnInit {
       return;
     }
 
+    const mensagemItem = new Mensagem(inputText);
+    if (!this.mensagemComTermosDeContexto(inputText)) {
+      mensagemItem.resposta = 'Não é possível responder essa pergunta, pois não tenho suporte.';
+      this.mensagens.push(mensagemItem);
+      this.botaoCopiar.push('Copiar');
+      this.saveToLocalStorage();
+      this.scrollToBottom();
+      this.resetTextarea();
+      this.inputText = '';
+      return;
+    }
+
+    if (!this.mensagemSobreCodigo(inputText)) {
+      mensagemItem.resposta = 'A mensagem não está relacionada a código.';
+      this.mensagens.push(mensagemItem);
+      this.botaoCopiar.push('Copiar');
+      this.saveToLocalStorage();
+      this.scrollToBottom();
+      this.resetTextarea();
+      this.inputText = '';
+      return;
+    }
+
     this.resetTextarea();
     this.inputText = '';
     this.isLoading = true;
 
-    const mensagemItem = new Mensagem(inputText);
     this.mensagens.push(mensagemItem);
     this.botaoCopiar.push('Copiar');
     this.saveToLocalStorage();
-
     this.scrollToBottom();
 
     this.botApiRestService.enviarMensagem(inputText).subscribe(
@@ -55,14 +76,32 @@ export class AnalyticodeComponent implements OnInit {
         this.saveToLocalStorage();
         this.scrollToBottom();
         this.isLoading = false;
+        this.resetTextarea();
       },
       (error) => {
         mensagemItem.resposta = 'Não é possível responder essa pergunta, pois não tenho suporte.';
         this.saveToLocalStorage();
         this.scrollToBottom();
         this.isLoading = false;
+        this.resetTextarea();
       }
     );
+  }
+
+  mensagemComTermosDeContexto(mensagem: string): boolean {
+    const termosContexto = /\b(código|programação|script|debug|variável|compilação|sintaxe|função|classe|objeto|método|loop|condicional|algoritmo|array|estrutura de dados|compilador|ide|framework|linguagem|biblioteca|sistema|API|algoritmo|JSON|parse|object|array|string|trecho de código|texto de código)\b/i;
+    return termosContexto.test(mensagem);
+  }
+
+  mensagemSobreCodigo(mensagem: string): boolean {
+    const padroesCodigo = /\b(class|function|if|else|for|while|const|let|var|return|try|catch|throw|=>|[\{\[\}\]\(\);=+*\/\-])/i;
+    const termosContexto = /\b(código|programação|script|debug|variável|compilação|sintaxe|função|classe|objeto|método|loop|condicional|algoritmo|array|estrutura de dados|compilador|ide|framework|linguagem|biblioteca|sistema|API|algoritmo|JSON|parse|object|array|string|trecho de código|texto de código)\b/i;
+    const palavrasIgnoradas = /\b(Rússia|Brasil|EUA|China|India|França|Alemanha|Japão)\b/i;
+
+    if (palavrasIgnoradas.test(mensagem)) {
+      return false;
+    }
+    return padroesCodigo.test(mensagem) || termosContexto.test(mensagem);
   }
 
   resetTextarea() {
